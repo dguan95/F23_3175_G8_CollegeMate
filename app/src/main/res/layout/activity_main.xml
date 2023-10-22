@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewMainPage"
-        app:srcCompat="@drawable/SocialEvents2" />
+        app:srcCompat="@drawable/socialevent" />
 
     <TextView
         android:id="@+id/txtViewAvailableHousing"
@@ -52,6 +52,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewAvailableHousing"
-        app:srcCompat="@drawable/CollegeHousing" />
+        app:srcCompat="@drawable/housing" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
