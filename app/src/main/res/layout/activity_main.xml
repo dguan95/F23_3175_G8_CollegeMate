@@ -7,12 +7,51 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/txtViewMainPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/txtMainPageEvents"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgViewMainPageEvents"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:contentDescription="@string/ImgMainPageSocial"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewMainPage"
+        app:srcCompat="@drawable/SocialEvents2" />
+
+    <TextView
+        android:id="@+id/txtViewAvailableHousing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/txtMainPageAvailableHousing"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewMainPageEvents" />
+
+    <ImageView
+        android:id="@+id/imgViewMainPageHousing"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:contentDescription="@string/ImgAvHousing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewAvailableHousing"
+        app:srcCompat="@drawable/CollegeHousing" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
