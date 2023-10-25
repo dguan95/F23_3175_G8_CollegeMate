@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (menuItemId == R.id.home_page){
             return true;
         } else if (menuItemId == R.id.chat_page){
-            startActivity(new Intent(MainActivity.this, ChatActivity.class));
+            startActivity(new Intent(MainActivity.this, QuizActivity.class));
             return true;
         } else if (menuItemId == R.id.search_page){
             startActivity(new Intent(MainActivity.this, SearchActivity.class));

@@ -8,4 +8,6 @@
     <string name="ButtonNavigationChat">Chat</string>
     <string name="ButtonNavigationSearch">Search</string>
     <string name="ButtonNavigationProfile">Profile</string>
+    <string name="txtViewTittleQuiz">QUIZ ROOMMATES</string>
+    <string name="textButtonQuestion">Submit</string>
 </resources>
