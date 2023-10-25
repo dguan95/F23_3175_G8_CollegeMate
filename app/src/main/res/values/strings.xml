@@ -4,4 +4,8 @@
     <string name="ImgMainPageSocial">Social Events</string>
     <string name="txtMainPageAvailableHousing">Available Housing</string>
     <string name="ImgAvHousing">Housing</string>
+    <string name="ButtonNavigationHome">Housing</string>
+    <string name="ButtonNavigationChat">Chat</string>
+    <string name="ButtonNavigationSearch">Search</string>
+    <string name="ButtonNavigationProfile">Profile</string>
 </resources>
