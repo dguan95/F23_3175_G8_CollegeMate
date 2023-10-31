@@ -2,6 +2,7 @@ package com.example.collegemate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -245,6 +246,9 @@ public class QuizActivity extends AppCompatActivity {
                         }
                     }
                     radGroupQuestion.clearCheck();
+                    break;
+                case 10:
+                    startActivity(new Intent(QuizActivity.this, MatchActivity.class));
                     break;
                         }
         });
