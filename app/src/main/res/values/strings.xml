@@ -4,4 +4,11 @@
     <string name="ImgMainPageSocial">Social Events</string>
     <string name="txtMainPageAvailableHousing">Available Housing</string>
     <string name="ImgAvHousing">Housing</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="txtHintEmail">email</string>
+    <string name="ttxHintPassword">password</string>
+    <string name="ttxBtnSignIn">Sign In</string>
+    <string name="txtBtnSignUp">Sign Up</string>
+    <string name="txtHintReEnterPass">confirm password</string>
+    <string name="txtBtnCreate">Create</string>
 </resources>
