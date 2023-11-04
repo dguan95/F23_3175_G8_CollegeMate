@@ -33,4 +33,14 @@
         <item>November</item>
         <item>December</item>
     </string-array>
+    <string name="ButtonNavigationHome">Housing</string>
+    <string name="ButtonNavigationChat">Chat</string>
+    <string name="ButtonNavigationSearch">Search</string>
+    <string name="ButtonNavigationProfile">Profile</string>
+    <string name="txtViewTittleQuiz">QUIZ ROOMMATES</string>
+    <string name="textButtonQuestion">Submit</string>
+    <string name="txtViewTittleMatch">Discover</string>
+    <string name="txtviewButtonProfile">Profile</string>
+    <string name="txtviewButtonMatch">Match</string>
+    <string name="contentDescriptionImageMatch">ImageProfilesMatch</string>
 </resources>

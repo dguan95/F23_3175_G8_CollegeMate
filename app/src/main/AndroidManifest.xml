@@ -27,7 +27,7 @@
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".Search"
+            android:name=".SearchActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
@@ -36,6 +36,19 @@
         <!-- android:exported="false" -->
         <!-- android:label="@string/title_activity_login" /> -->
         <activity
+            android:name=".MatchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -43,8 +56,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
