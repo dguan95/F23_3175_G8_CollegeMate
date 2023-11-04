@@ -23,6 +23,7 @@ public class ProfileCreationActivity extends AppCompatActivity {
     EditText lastName;
     EditText dOB;
     EditText year;
+    // new branch
     Spinner month;
     EditText major;
     Button btnCreateProfile;
