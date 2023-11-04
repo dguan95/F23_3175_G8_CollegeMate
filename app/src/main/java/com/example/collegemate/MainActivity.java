@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             startActivity(new Intent(MainActivity.this, SearchActivity.class));
             return true;
         } else if (menuItemId == R.id.profile_page){
-            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            startActivity(new Intent(MainActivity.this, ProfilePage.class));
             return true;
         }
 
