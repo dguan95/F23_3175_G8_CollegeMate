@@ -2,6 +2,7 @@ package com.example.collegemate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.view.View;
@@ -66,6 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                     Toast.makeText(SignUpActivity.this, "User created!", Toast.LENGTH_SHORT).show();
                     finish();
+                    startActivity(new Intent(SignUpActivity.this,ProfileCreationActivity.class));
                 } catch (SQLiteException e) {
                     e.printStackTrace();
                 }

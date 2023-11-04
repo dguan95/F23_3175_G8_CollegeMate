@@ -11,4 +11,26 @@
     <string name="txtBtnSignUp">Sign Up</string>
     <string name="txtHintReEnterPass">confirm password</string>
     <string name="txtBtnCreate">Create</string>
+    <string name="txtSignInGoogle">Sign In With Google</string>
+    <string name="txtHintLName">Last Name</string>
+    <string name="txtHintFName">First Name</string>
+    <string name="txtHintMajor">Major</string>
+    <string name="txtHintDoB">Date of Birth</string>
+    <string name="txtYear">Year</string>
+    <string name="txtDay">Day</string>
+    <string-array name="txtMonths">
+        <item>Month</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 </resources>

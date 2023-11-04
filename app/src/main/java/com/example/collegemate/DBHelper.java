@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "MyAppDatabase";
+    private static final String DATABASE_NAME = "CollegeMateDatabase";
     private static final int DATABASE_VERSION = 1;
 
-    // create user table
+
     private static final String TABLE_USERS_CREATE = "CREATE TABLE users " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "email TEXT, " +
