@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     //Hello, this is a test - Diana
     //Hello, this is test again, editing on GitHub to see changes in my PC - Diana
 
-    //HI, this is a test -Zoia
+    //HI, this is a test -Zoia !
     //Hi, this is a test -Dani
 
     BottomNavigationView bottomNavigationView;
