@@ -4,6 +4,35 @@
     <string name="ImgMainPageSocial">Social Events</string>
     <string name="txtMainPageAvailableHousing">Available Housing</string>
     <string name="ImgAvHousing">Housing</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="txtHintEmail">email</string>
+    <string name="ttxHintPassword">password</string>
+    <string name="ttxBtnSignIn">Sign In</string>
+    <string name="txtBtnSignUp">Sign Up</string>
+    <string name="txtHintReEnterPass">confirm password</string>
+    <string name="txtBtnCreate">Create</string>
+    <string name="txtSignInGoogle">Sign In With Google</string>
+    <string name="txtHintLName">Last Name</string>
+    <string name="txtHintFName">First Name</string>
+    <string name="txtHintMajor">Major</string>
+    <string name="txtHintDoB">Date of Birth</string>
+    <string name="txtYear">Year</string>
+    <string name="txtDay">Day</string>
+    <string-array name="txtMonths">
+        <item>Month</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
     <string name="ButtonNavigationHome">Housing</string>
     <string name="ButtonNavigationChat">Chat</string>
     <string name="ButtonNavigationSearch">Search</string>
@@ -14,4 +43,5 @@
     <string name="txtviewButtonProfile">Profile</string>
     <string name="txtviewButtonMatch">Match</string>
     <string name="contentDescriptionImageMatch">ImageProfilesMatch</string>
+    <string name="txtViewHousingTips">Housing and Tips</string>
 </resources>
