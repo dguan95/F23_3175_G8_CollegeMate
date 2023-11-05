@@ -43,4 +43,5 @@
     <string name="txtviewButtonProfile">Profile</string>
     <string name="txtviewButtonMatch">Match</string>
     <string name="contentDescriptionImageMatch">ImageProfilesMatch</string>
+    <string name="txtViewHousingTips">Housing and Tips</string>
 </resources>
