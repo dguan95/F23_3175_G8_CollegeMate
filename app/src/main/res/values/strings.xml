@@ -47,6 +47,11 @@
     <string name="txtSearchTitle">Search</string>
     <string name="imgViewHousingTips1">Make yourself feel like home</string>
     <string name="txtHousingTip1">Make yourself feel like home by personalizing your space!\n</string>
-    <string name="txtHousingTip1_1">- Decorate your room with posters, pictures of the people you love.\n- Set up item that are symbolic for you.</string>
+    <string name="txtHousingTip1_1">Decorate your room with posters, pictures of the people you love and try setting up items that are symbolic for you.</string>
     <string name="txtHousingTip2Title">Get Involved in Residence Activities!</string>
+    <string name="txtViewHousingTip2">Participate in residence events and activities to build a sense of community and make new friends during your stay.</string>
+    <string name="txtHousingTips3Title">Staying Safe in Student Housing</string>
+    <string name="txtHousingTip3">Always lock your door when you leave, report suspicious activity and don\'t lend your key fob to others.</string>
+    <string name="txtViewHousingTip4Title">Create a Harmonious Environment</string>
+    <string name="txtHousingTip4">Respect diverse backgrounds, traditions and personal choices in shared spaces</string>
 </resources>
