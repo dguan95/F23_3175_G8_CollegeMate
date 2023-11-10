@@ -3,17 +3,21 @@ package com.example.collegemate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     //Hello, this is a test - Diana
     //Hello, this is test again, editing on GitHub to see changes in my PC - Diana
-
     //HI, this is a test -Zoia !
     //Hi, this is a test -Dani
 
@@ -54,4 +58,5 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
     }
+
 }
