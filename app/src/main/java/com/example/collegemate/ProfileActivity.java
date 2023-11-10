@@ -15,7 +15,7 @@ public class ProfileActivity extends AppCompatActivity implements BottomNavigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        bottomNavigationView=findViewById(R.id.bottomNavigationView);
+        bottomNavigationView=findViewById(R.id.BottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.profile_page);
     }

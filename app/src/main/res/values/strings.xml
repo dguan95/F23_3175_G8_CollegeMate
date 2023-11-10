@@ -45,4 +45,8 @@
     <string name="contentDescriptionImageMatch">ImageProfilesMatch</string>
     <string name="txtViewHousingTips">Housing and Tips</string>
     <string name="txtSearchTitle">Search</string>
+    <string name="imgViewHousingTips1">Make yourself feel like home</string>
+    <string name="txtHousingTip1">Make yourself feel like home by personalizing your space!\n</string>
+    <string name="txtHousingTip1_1">- Decorate your room with posters, pictures of the people you love.\n- Set up item that are symbolic for you.</string>
+    <string name="txtHousingTip2Title">Get Involved in Residence Activities!</string>
 </resources>

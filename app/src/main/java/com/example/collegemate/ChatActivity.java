@@ -15,7 +15,7 @@ public class ChatActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        bottomNavigationView=findViewById(R.id.bottomNavigationView);
+        bottomNavigationView=findViewById(R.id.BottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.chat_page);
     }
