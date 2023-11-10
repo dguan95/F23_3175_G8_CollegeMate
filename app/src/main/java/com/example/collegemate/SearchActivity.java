@@ -58,7 +58,7 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
 
         });
 
-        bottomNavigationView=findViewById(R.id.bottomNavigationView);
+        bottomNavigationView=findViewById(R.id.BottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.search_page);
 

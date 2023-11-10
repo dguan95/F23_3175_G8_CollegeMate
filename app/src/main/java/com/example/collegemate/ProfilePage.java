@@ -28,7 +28,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         TxtViewMajor = findViewById(R.id.txtViewMajor);
 
 
-        bottomNavigationView=findViewById(R.id.bottomNavigationView);
+        bottomNavigationView=findViewById(R.id.BottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.profile_page);
 
