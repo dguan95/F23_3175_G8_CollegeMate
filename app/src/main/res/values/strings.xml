@@ -54,4 +54,12 @@
     <string name="txtHousingTip3">Always lock your door when you leave, report suspicious activity and don\'t lend your key fob to others.</string>
     <string name="txtViewHousingTip4Title">Create a Harmonious Environment</string>
     <string name="txtHousingTip4">Respect diverse backgrounds, traditions and personal choices in shared spaces</string>
+    <string name="txtFindAccom">Find Accommodation</string>
+    <string name="txtHousingAvail">Housing Availability</string>
+    <string name="txtAccommodationDetails">Details</string>
+    <string name="btnReserveOrBook">Reserve or Book to View</string>
+    <string name="txtCurrentAccomm">Your Current Accommodation Details</string>
+    <string name="txtCurrentAccomDetails">Shared bedroom $1.600 due November</string>
+    <string name="btnPayRent">Pay Housing</string>
+    <string name="btnModifyHousing">Modify Housing</string>
 </resources>
