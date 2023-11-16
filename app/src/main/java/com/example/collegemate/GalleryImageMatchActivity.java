@@ -1,22 +1,22 @@
 package com.example.collegemate;
 
 public class GalleryImageMatchActivity {
-    private int ImgId;
+    private String Info;
     private String ImgName;
     private int ImgPic;
 
-    public GalleryImageMatchActivity(int imgId, String imgName, int imgPic) {
-        ImgId = imgId;
+    public GalleryImageMatchActivity(String imgId, String imgName, int imgPic) {
+        Info = imgId;
         ImgName = imgName;
         ImgPic = imgPic;
     }
 
-    public int getImgId() {
-        return ImgId;
+    public String getInfo() {
+        return Info;
     }
 
-    public void setImgId(int imgId) {
-        ImgId = imgId;
+    public void setInfo(String info) {
+        Info = info;
     }
 
     public String getImgName() {

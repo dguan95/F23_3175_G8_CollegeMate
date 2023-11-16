@@ -5,6 +5,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,16 +14,41 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class RecyclerViewMatchAdapter extends RecyclerView.Adapter<RecyclerViewMatchAdapter.ImageViewHolder> {
+public class RecyclerViewMatchAdapter
+        extends RecyclerView.Adapter<RecyclerViewMatchAdapter.ImageViewHolder> {
 
     List<GalleryImageMatchActivity> AdapterImages;
 
-    public RecyclerViewMatchAdapter(List<GalleryImageMatchActivity> adapterImages) {
+    int SelectedInd;
+    OnItemClickListener onItemClickListener;
+
+    public RecyclerViewMatchAdapter(List<GalleryImageMatchActivity> adapterImages,
+                                    OnItemClickListener onItemClickListener) {
         AdapterImages = adapterImages;
+        SelectedInd = -1;
+        this.onItemClickListener = onItemClickListener;
     }
+
+    public List<GalleryImageMatchActivity> getAdapterImages() {
+        return AdapterImages;
+    }
+
+    public void setAdapterImages(List<GalleryImageMatchActivity> adapterImages) {
+        AdapterImages = adapterImages;
+        SelectedInd = -1;
+    }
+
+    public int getSelectedInd() {
+        return SelectedInd;
+    }
+
+    public void setSelectedInd(int selectedInd) {
+        SelectedInd = selectedInd;
+    }
+
     @NonNull
     @Override
-    public RecyclerViewMatchAdapter.ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_item_match, parent, false);
         ImageViewHolder holder = new ImageViewHolder(itemView);
@@ -30,10 +56,18 @@ public class RecyclerViewMatchAdapter extends RecyclerView.Adapter<RecyclerViewM
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewMatchAdapter.ImageViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
 
-        holder.imgViewItem.setImageResource(AdapterImages.get(position).getImgPic());
-        holder.itemView.setBackgroundColor(Color.parseColor("#3F704D"));
+        holder.imgViewItem
+                .setImageResource(AdapterImages.get(position).getImgPic());
+        holder.txtViewItem.setText(AdapterImages.get(position).getImgName());
+        holder.itemView.setBackgroundColor(Color.parseColor("#1C1B1A"));
+        if (position == SelectedInd){
+            holder.itemView.setBackgroundColor(Color.parseColor("#303234"));
+        } else {
+            holder.itemView.setBackgroundColor(
+                    Color.parseColor("#1C1B1A"));
+        }
 
     }
 
@@ -44,11 +78,27 @@ public class RecyclerViewMatchAdapter extends RecyclerView.Adapter<RecyclerViewM
     }
     public class ImageViewHolder extends RecyclerView.ViewHolder{
         ImageView imgViewItem;
-        TextView textViewItem;
+        TextView txtViewItem;
 
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
             imgViewItem = itemView.findViewById(R.id.imageViewItem);
+            txtViewItem = itemView.findViewById(R.id.textViewMatch);
+            imgViewItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onItemClick(getAdapterPosition());
+                    SelectedInd = getAdapterPosition();
+                    //when notifydatasetchanged is called,
+                    // getAdapterPosition() goes back to -1
+                    notifyDataSetChanged();
+                }
+            });
         }
     }
+
+    public interface OnItemClickListener {
+        public void onItemClick(int i);
+    }
 }
+

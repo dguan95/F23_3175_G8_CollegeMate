@@ -8,10 +8,17 @@
         android:id="@+id/imageViewItem"
         style="@style/TextAppearance.Compat.Notification.Info"
         android:layout_width="match_parent"
-        android:layout_height="470dp"
+        android:layout_height="400dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_weight="0.8"
         android:contentDescription="@string/contentDescriptionImageMatch"
         app:srcCompat="@drawable/user1" />
+
+    <TextView
+        android:id="@+id/textViewMatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:visibility="invisible" />
 </LinearLayout>
