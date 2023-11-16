@@ -3,6 +3,7 @@ package com.example.collegemate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView=findViewById(R.id.BottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home_page);
+
+        /*Intent i = getIntent();
+        Bundle bundle = i.getExtras();
+        String user = bundle.getString("USER");
+        Toast.makeText(this, "user"+ user, Toast.LENGTH_SHORT).show();*/
 
     }
 

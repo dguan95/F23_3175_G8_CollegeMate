@@ -22,50 +22,66 @@
         android:layout_height="100dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile" />
+        app:srcCompat="@drawable/baseline_person_24" />
 
     <TextView
         android:id="@+id/txtViewFName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgViewProfilIcon2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewProfilIcon2" />
 
     <TextView
         android:id="@+id/txtViewLName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgViewProfilIcon2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewFName" />
 
     <TextView
         android:id="@+id/txtViewMajor"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgViewProfilIcon2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewLName" />
 
     <TextView
         android:id="@+id/txtViewBirth"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgViewProfilIcon2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewMajor" />
+
+    <Button
+        android:id="@+id/btnProfileSettings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/BottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

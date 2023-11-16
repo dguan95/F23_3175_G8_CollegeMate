@@ -62,4 +62,5 @@
     <string name="txtCurrentAccomDetails">Shared bedroom $1.600 due November</string>
     <string name="btnPayRent">Pay Housing</string>
     <string name="btnModifyHousing">Modify Housing</string>
+    <string name="btnText">btn gallery</string>
 </resources>
