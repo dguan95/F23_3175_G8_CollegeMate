@@ -64,8 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Login or Password is not correct", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(i);
+                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    mainIntent.putExtra("userId", user.getId()); // Pass the userId to MainActivity
+                    startActivity(mainIntent);
                 }
             }
         });

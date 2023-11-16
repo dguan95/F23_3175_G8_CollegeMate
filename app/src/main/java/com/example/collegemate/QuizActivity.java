@@ -3,6 +3,7 @@ package com.example.collegemate;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,13 +15,19 @@ import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
     int index=0;
+    long userId = -1;
+    TextView textViewQuizInfo;
+    DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+        dbHelper = new DBHelper(this);
+        textViewQuizInfo = findViewById(R.id.textViewQuizInfo);
 
         TextView txtViewQuestion = findViewById(R.id.textViewQuestion);
         TextView txtViewQuestionContent = findViewById(R.id.textViewQuestionContent);
+
         ImageView imgViewQuestion = findViewById(R.id.imageViewQuestion);
         Button buttonQuestion = findViewById(R.id.buttonQuestion);
         RadioGroup radGroupQuestion= findViewById(R.id.RadioGroupQuestions);
@@ -33,8 +40,14 @@ public class QuizActivity extends AppCompatActivity {
         radioButtonA.setText("In your roommate's bed");
         radioButtonB.setText("In your bed");
         radioButtonC.setText("On the couch");
+
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("userId")) {
+            userId = intent.getLongExtra("userId", -1);
+        }
         buttonQuestion.setOnClickListener((View view) -> {
-            int answer1,answer2,answer3,answer4,answer5,answer6,answer7,answer8,answer9,answer10;
+            int answer1 = 0, answer2 = 0, answer3 = 0, answer4 = 0, answer5 = 0,
+                    answer6 = 0, answer7 = 0, answer8 = 0, answer9 = 0, answer10 = 0, total=0;
 
             switch (index){
                 case 0:
@@ -248,9 +261,18 @@ public class QuizActivity extends AppCompatActivity {
                     radGroupQuestion.clearCheck();
                     break;
                 case 10:
-                    startActivity(new Intent(QuizActivity.this, MatchActivity.class));
+                    int[] answers = {answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10};
+
+                    if (userId != -1) {
+                        long quizId = dbHelper.addQuizData(userId, answers);
+
+                        startActivity(new Intent(QuizActivity.this, MatchActivity.class));
+                    }
                     break;
                         }
+
         });
+
     }
 }
+
