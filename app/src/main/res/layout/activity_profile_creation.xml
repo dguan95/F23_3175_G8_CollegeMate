@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ECECEC"
+    android:contentDescription="@string/btnText"
     tools:context=".ProfileCreationActivity">
 
     <ImageView
@@ -13,45 +14,50 @@
         android:layout_height="100dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile" />
+        app:srcCompat="@drawable/baseline_person_24" />
 
     <EditText
         android:id="@+id/editTXtFName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="@string/txtHintFName"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgViewProfilIcon"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewProfilIcon" />
 
     <EditText
         android:id="@+id/editTXtLastName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="48dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="@string/txtHintLName"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgViewProfilIcon"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTXtFName" />
 
     <EditText
         android:id="@+id/editTxtMajor"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="48dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="@string/txtHintMajor"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgViewProfilIcon"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTXtLastName" />
 
     <Button
@@ -95,8 +101,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
 
-        android:spinnerMode="dialog"
         android:entries="@array/txtMonths"
+        android:spinnerMode="dialog"
         app:layout_constraintStart_toEndOf="@+id/editTxtDayB"
         app:layout_constraintTop_toBottomOf="@+id/txtViewDoB" />
 
@@ -112,14 +118,14 @@
         app:layout_constraintStart_toEndOf="@+id/spinnerMonth"
         app:layout_constraintTop_toBottomOf="@+id/txtViewDoB" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnOpenGallery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="Gallery"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewProfilIcon" />
+        android:clickable="true"
+        android:contentDescription="@string/btnText"
+        app:layout_constraintStart_toEndOf="@+id/imgViewProfilIcon"
+        app:layout_constraintTop_toTopOf="@+id/imgViewProfilIcon"
+        app:srcCompat="@drawable/baseline_photo_camera_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
