@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "CollegeMateDatabase";
@@ -25,6 +27,22 @@ public class DBHelper extends SQLiteOpenHelper {
             "major TEXT, " +
             "image BLOB);";
 
+    private static final String TABLE_QUIZ_CREATE = "CREATE TABLE quiz_answers " +
+            "(quizid INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "user_id INTEGER, " +
+            "answer1 INTEGER, " +
+            "answer2 INTEGER, " +
+            "answer3 INTEGER, " +
+            "answer4 INTEGER, " +
+            "answer5 INTEGER, " +
+            "answer6 INTEGER, " +
+            "answer7 INTEGER, " +
+            "answer8 INTEGER, " +
+            "answer9 INTEGER, " +
+            "answer10 INTEGER, " +
+           "FOREIGN KEY(user_id) REFERENCES users(_id));";
+
+
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,12 +50,15 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_USERS_CREATE);
+        db.execSQL(TABLE_QUIZ_CREATE);
+
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS users");
+        db.execSQL("DROP TABLE IF EXISTS quiz_answers");
         onCreate(db);
 
     }
@@ -51,6 +72,37 @@ public class DBHelper extends SQLiteOpenHelper {
         long userId = db.insert("users", null, values);
         db.close();
         return userId;
+    }
+
+    public long saveQuizAnswers(long userId, int[] answers) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("user_id", userId);
+        for (int i = 0; i < answers.length; i++) {
+            values.put("answer" + (i + 1), answers[i]);
+        }
+        long quizId = db.insert("quiz_answers", null, values);
+        db.close();
+        return quizId;
+    }
+    public int[] getQuizAnswersForUser(long userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int[] answers = new int[10];
+
+        Cursor cursor = db.query("quiz_answers", null, "user_id = ?", new String[]{String.valueOf(userId)},
+                null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            for (int i = 0; i < 10; i++) {
+                answers[i] = cursor.getInt(i + 2);
+                          }
+            cursor.close();
+        } else {
+
+            Arrays.fill(answers, -1);
+        }
+
+        return answers;
     }
 
 
@@ -122,3 +174,4 @@ public class DBHelper extends SQLiteOpenHelper {
         return rowsAffected;
     }
 }
+
