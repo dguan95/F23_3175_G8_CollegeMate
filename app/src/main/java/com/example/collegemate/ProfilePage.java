@@ -3,18 +3,44 @@ package com.example.collegemate;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.io.ByteArrayOutputStream;
 
 public class ProfilePage extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     TextView txtViewFName;
     TextView TxtViewLName;
     TextView TxtViewMajor;
     TextView TxtViewDOB;
+    ImageView imageView;
+    Button profileSettings;
+    DBHelper dbHelper;
+    String fNameInstance;
+    String lNameInstance;
+    String majorInstance;
+
+    int birthYearInstance;
+    int birthMonthInstance;
+    int birthDateInstance;
+
+    private SharedPreferences sharedPreferences;
+
 
     BottomNavigationView bottomNavigationView;
     @Override
@@ -26,35 +52,108 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         TxtViewLName = findViewById(R.id.txtViewLName);
         TxtViewDOB = findViewById(R.id.txtViewBirth);
         TxtViewMajor = findViewById(R.id.txtViewMajor);
+        imageView = findViewById(R.id.imgViewProfilIcon2);
+
+        dbHelper = new DBHelper(this);
 
 
         bottomNavigationView=findViewById(R.id.BottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.profile_page);
 
+        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+
         Intent i = getIntent();
         Bundle bundle = i.getExtras();
+            Log.d("TEST", "HERE 1");
 
-        if (bundle != null) {
-
-            String fName = bundle.getString("FNAME");
-            String lName = bundle.getString("LNAME");
-            String major = bundle.getString("MAJOR");
-            String day = bundle.getString("DAY");
-            String month = bundle.getString("MONTH");
-            String year = bundle.getString("YEAR");
-
-            txtViewFName.setText(fName);
-            TxtViewLName.setText(lName);
-            TxtViewMajor.setText(major);
-            TxtViewDOB.setText(day + " of " + month + ", " + year);
+        if (sharedPreferences.contains("FNAME") && sharedPreferences.contains("LNAME")
+                && sharedPreferences.contains("MAJOR") && sharedPreferences.contains("DOB")) {
+            Log.d("LOADING STATE", "FNAME: " + sharedPreferences.getString("FNAME", "none"));
+            loadState();
 
         } else {
-            txtViewFName.setText("First Name");
-            TxtViewLName.setText("Last Name");
-            TxtViewMajor.setText("Major");
-            TxtViewDOB.setText("00-00-0000");
+
+            if (bundle.getString("FNAME") != null) {
+                String fName = bundle.getString("FNAME");
+                String lName = bundle.getString("LNAME");
+                String major = bundle.getString("MAJOR");
+                String day = bundle.getString("DAY");
+                String month = bundle.getString("MONTH");
+                String year = bundle.getString("YEAR");
+
+//                byte[] image = bundle.getByteArray("IMAGE");
+//                Bitmap bitmap = BitmapFactory.decodeByteArray(image,  0, image.length);
+//
+//                imageView.setImageBitmap(bitmap);
+                txtViewFName.setText(fName);
+                TxtViewLName.setText(lName);
+                TxtViewMajor.setText(major);
+                TxtViewDOB.setText(day + " of " + month + ", " + year);
+            } else {
+                if (getIntent() != null) {
+//                String email = getIntent().getExtras().getString("userEmail");
+//                String password = getIntent().getExtras().getString("userPassword");
+//
+//                User user = dbHelper.getUser(email, password);
+
+                    User user = (User) getIntent().getSerializableExtra("user");
+
+                    Log.d("BIBAS", user.getEmail() + " " + user.getPassword());
+                    Toast.makeText(this, "Success " + user.getEmail() + " " + user.getFirstName(), Toast.LENGTH_SHORT).show();
+
+                    txtViewFName.setText(user.getFirstName());
+                    TxtViewLName.setText(user.getLastName());
+                    TxtViewMajor.setText(user.getMajor());
+                    TxtViewDOB.setText(user.getBirthDate() + "-" + user.getBirthMonth() + "-" + user.getBirthYear());
+                } else {
+                    txtViewFName.setText("B");
+                    TxtViewLName.setText("A");
+                    TxtViewMajor.setText("C");
+                    TxtViewDOB.setText("R");
+                }
+            }
+
+
+
         }
+    }
+
+    private void loadState() {
+        txtViewFName.setText(sharedPreferences.getString("FNAME", "B"));
+        TxtViewLName.setText(sharedPreferences.getString("LNAME", "A"));
+        TxtViewMajor.setText(sharedPreferences.getString("MAJOR", "C"));
+        TxtViewDOB.setText(sharedPreferences.getString("DOB", "R"));
+
+//        String imageString = sharedPreferences.getString("IMAGE", null);
+//
+//        if (imageString != null) {
+//            byte[] imageByteArray = Base64.decode(imageString, Base64.DEFAULT);
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
+//            imageView.setImageBitmap(bitmap);
+//        }
+    }
+
+    private void saveState() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("FNAME", txtViewFName.getText().toString());
+        editor.putString("LNAME", TxtViewLName.getText().toString());
+        editor.putString("MAJOR", TxtViewMajor.getText().toString());
+        editor.putString("DOB", TxtViewDOB.getText().toString());
+
+//        BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+//        Bitmap bitmap = drawable.getBitmap();
+//        byte[] imageByteArray = convertBitmapToByteArray(bitmap);
+//        String imageString = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
+//
+//        editor.putString("IMAGE", imageString);
+        editor.apply();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveState();
     }
 
     @Override
@@ -82,4 +181,24 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         super.onPointerCaptureChanged(hasCapture);
     }
 
+    public static byte[] convertBitmapToByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
+
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putString("FNAME", txtViewFName.getText().toString());
+        savedInstanceState.putString("LNAME", TxtViewLName.getText().toString());
+        savedInstanceState.putString("MAJOR", TxtViewMajor.getText().toString());
+        savedInstanceState.putString("DOB", TxtViewDOB.getText().toString());
+
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sharedPreferences.edit().clear().apply();
+    }
 }
