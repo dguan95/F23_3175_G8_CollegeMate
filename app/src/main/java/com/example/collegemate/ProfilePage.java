@@ -56,6 +56,14 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
 
         dbHelper = new DBHelper(this);
 
+        Button btn = findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfilePage.this, ResourceSharingActivity.class));
+            }
+        });
+
 
         bottomNavigationView=findViewById(R.id.BottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -67,14 +75,14 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         Bundle bundle = i.getExtras();
             Log.d("TEST", "HERE 1");
 
-        if (sharedPreferences.contains("FNAME") && sharedPreferences.contains("LNAME")
-                && sharedPreferences.contains("MAJOR") && sharedPreferences.contains("DOB")) {
-            Log.d("LOADING STATE", "FNAME: " + sharedPreferences.getString("FNAME", "none"));
-            loadState();
+//        if (sharedPreferences.contains("FNAME") && sharedPreferences.contains("LNAME")
+//                && sharedPreferences.contains("MAJOR") && sharedPreferences.contains("DOB")) {
+//            Log.d("LOADING STATE", "FNAME: " + sharedPreferences.getString("FNAME", "none"));
+//            loadState();
+//
+//        } else {
 
-        } else {
-
-            if (bundle.getString("FNAME") != null) {
+            if (bundle != null && bundle.getString("FNAME") != null) {
                 String fName = bundle.getString("FNAME");
                 String lName = bundle.getString("LNAME");
                 String major = bundle.getString("MAJOR");
@@ -89,35 +97,58 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                 txtViewFName.setText(fName);
                 TxtViewLName.setText(lName);
                 TxtViewMajor.setText(major);
-                TxtViewDOB.setText(day + " of " + month + ", " + year);
+                TxtViewDOB.setText(day + "-" + month + "-" + year);
             } else {
+                Log.d("TEST 1", "HERE");
                 if (getIntent() != null) {
+                    Log.d("TEST 2", getIntent().getSerializableExtra("user") + "");
 //                String email = getIntent().getExtras().getString("userEmail");
 //                String password = getIntent().getExtras().getString("userPassword");
 //
 //                User user = dbHelper.getUser(email, password);
+                    Log.d("GETTING USER", "asfsafsa");
 
                     User user = (User) getIntent().getSerializableExtra("user");
 
-                    Log.d("BIBAS", user.getEmail() + " " + user.getPassword());
-                    Toast.makeText(this, "Success " + user.getEmail() + " " + user.getFirstName(), Toast.LENGTH_SHORT).show();
+                    if (user != null) {
+                        Log.d("BIBAS", user.getEmail() + " " + user.getPassword());
+                        Toast.makeText(this, "Success " + user.getEmail() + " " + user.getFirstName(), Toast.LENGTH_SHORT).show();
 
-                    txtViewFName.setText(user.getFirstName());
-                    TxtViewLName.setText(user.getLastName());
-                    TxtViewMajor.setText(user.getMajor());
-                    TxtViewDOB.setText(user.getBirthDate() + "-" + user.getBirthMonth() + "-" + user.getBirthYear());
+                        txtViewFName.setText(user.getFirstName());
+                        TxtViewLName.setText(user.getLastName());
+                        TxtViewMajor.setText(user.getMajor());
+                        TxtViewDOB.setText(user.getBirthDate() + "-" + user.getBirthMonth() + "-" + user.getBirthYear());
+                    } else {
+                        if (sharedPreferences.contains("FNAME") && sharedPreferences.contains("LNAME")
+                                && sharedPreferences.contains("MAJOR") && sharedPreferences.contains("DOB")) {
+                            Log.d("LOADING STATE", "FNAME: " + sharedPreferences.getString("FNAME", "none"));
+                            loadState();
+                        } else {
+                            txtViewFName.setText("B");
+                            TxtViewLName.setText("A");
+                            TxtViewMajor.setText("R");
+                            TxtViewDOB.setText("K");
+                        }
+                    }
                 } else {
-                    txtViewFName.setText("B");
-                    TxtViewLName.setText("A");
-                    TxtViewMajor.setText("C");
-                    TxtViewDOB.setText("R");
+                    Log.d("TEST 3", "HERE");
+                    if (sharedPreferences.contains("FNAME") && sharedPreferences.contains("LNAME")
+                            && sharedPreferences.contains("MAJOR") && sharedPreferences.contains("DOB")) {
+                        Log.d("LOADING STATE", "FNAME: " + sharedPreferences.getString("FNAME", "none"));
+                        loadState();
+                    } else {
+                        txtViewFName.setText("B");
+                        TxtViewLName.setText("A");
+                        TxtViewMajor.setText("C");
+                        TxtViewDOB.setText("R");
+                    }
                 }
             }
 
 
 
         }
-    }
+//    }
 
     private void loadState() {
         txtViewFName.setText(sharedPreferences.getString("FNAME", "B"));
@@ -153,6 +184,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
     @Override
     protected void onPause() {
         super.onPause();
+        Toast.makeText(this, "Activity Paused", Toast.LENGTH_SHORT).show();
         saveState();
     }
 
@@ -195,10 +227,19 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
 
         super.onSaveInstanceState(savedInstanceState);
     }
+@Override
+protected void onStop() {
+    super.onStop();
+//    saveState();
+    Toast.makeText(this, "Activity Stopped", Toast.LENGTH_SHORT).show();
+//    sharedPreferences.edit().clear().apply();
+}
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        sharedPreferences.edit().clear().apply();
-    }
+@Override
+protected void onDestroy() {
+    sharedPreferences.edit().clear().apply();
+    saveState();
+    Toast.makeText(this, "Activity Destroyed", Toast.LENGTH_SHORT).show();
+    super.onDestroy();
+}
 }

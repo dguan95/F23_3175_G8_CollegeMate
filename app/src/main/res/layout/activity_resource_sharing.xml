@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResourceSharingActivity">
+
+    <TextView
+        android:id="@+id/txtViewUsefuWebSitesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/txtUsefulWeb"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtViewTedLink"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center|left"
+        android:text="@string/tedLink"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/imgViewTed"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewUsefuWebSitesTitle" />
+
+    <ImageView
+        android:id="@+id/imgViewTed"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewUsefuWebSitesTitle"
+        app:srcCompat="@drawable/ted" />
+
+    <TextView
+        android:id="@+id/txtViewStudyfy"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center|left"
+        android:text="@string/studyfyLink"
+        app:layout_constraintEnd_toStartOf="@+id/imgViewStudyfy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewTedLink" />
+
+    <ImageView
+        android:id="@+id/imgViewStudyfy"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewTed"
+        app:srcCompat="@drawable/studyfy" />
+
+    <TextView
+        android:id="@+id/txtViewCourseEra"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center|left"
+        android:text="@string/courseEraLink"
+        app:layout_constraintEnd_toStartOf="@+id/imgViewCourseEra"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewStudyfy" />
+
+    <ImageView
+        android:id="@+id/imgViewCourseEra"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewStudyfy"
+        app:srcCompat="@drawable/courseera" />
+
+    <TextView
+        android:id="@+id/txtViewHealthLine"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center|left"
+        android:text="@string/lhealthLineLink"
+        app:layout_constraintEnd_toStartOf="@+id/imgViewHealthLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewCourseEra" />
+
+    <ImageView
+        android:id="@+id/imgViewHealthLine"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewCourseEra"
+        app:srcCompat="@drawable/healthline" />
+
+    <TextView
+        android:id="@+id/txtViewCopyleaks"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center|left"
+        android:text="@string/copyleaksLink"
+        app:layout_constraintEnd_toStartOf="@+id/imgViewCopyleaks"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewHealthLine" />
+
+    <ImageView
+        android:id="@+id/imgViewCopyleaks"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewHealthLine"
+        app:srcCompat="@drawable/copyleaks" />
+
+    <TextView
+        android:id="@+id/txtViewCareer"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center|left"
+        android:text="@string/careerLink"
+        app:layout_constraintEnd_toStartOf="@+id/imgViewCareer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewCopyleaks" />
+
+    <ImageView
+        android:id="@+id/imgViewCareer"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewCopyleaks"
+        app:srcCompat="@drawable/balancecareers" />
+
+    <TextView
+        android:id="@+id/txtViewLifeH"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center|left"
+        android:text="@string/LifeHLink"
+        app:layout_constraintEnd_toStartOf="@+id/imgViewLifeH"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewCareer" />
+
+    <ImageView
+        android:id="@+id/imgViewLifeH"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewCareer"
+        app:srcCompat="@drawable/lifehack" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

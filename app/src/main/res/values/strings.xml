@@ -63,4 +63,24 @@
     <string name="btnPayRent">Pay Housing</string>
     <string name="btnModifyHousing">Modify Housing</string>
     <string name="btnText">btn gallery</string>
+    <string name="tedLink"><a href="https://www.ted.com/">LINK</a></string>
+    <string name="courseEraLink"><a href="https://www.coursera.org/">Revise and review your own paper</a>
+    </string>
+    <string name="LifeHLink"><a href="https://www.lifehack.org/">Articles written by experts and free courses</a>
+    </string>
+    <string name="copyleaksLink"><a href="https://copyleaks.com/plagiarism-checker">Your help to avoid plagiarism</a>
+    </string>
+    <string name="studyfyLink"><a href="https://studyfy.com/">Vast collection of essay samples and articles on Studyfy</a>
+    </string>
+    <string name="careerLink"><a href="https://www.thebalancemoney.com/career-planning-6265513">Prepare for your perfect career path</a>
+    </string>
+    <string name="lhealthLineLink"><a href="https://www.healthline.com/">Cope with most common problems that students face</a>
+    </string>
+    <string name="txtUsefulWeb">Useful Websites For Students</string>
+
+    <string name="tedLink1"><a href="https://www.ted.com/">Boost your creativity with  TED Talks</a>
+    </string>
+
+
+
 </resources>
