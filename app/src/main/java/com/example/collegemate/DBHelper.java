@@ -100,6 +100,52 @@ public class DBHelper extends SQLiteOpenHelper {
         return user;
     }
 
+    public User getUser(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        User user = null;
+
+        Cursor cursor = db.query("users", null, "email = ?",
+                new String[]{email}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex("_id");
+            int emailIndex = cursor.getColumnIndex("email");
+            int passwordIndex = cursor.getColumnIndex("password");
+
+            int majorIndex = cursor.getColumnIndex("major");
+            int birthDateIndex = cursor.getColumnIndex("birthDate");
+            int birthYearIndex = cursor.getColumnIndex("birthYear");
+            int birthMonthIndex = cursor.getColumnIndex("birthMonth");
+            int fnameIndex = cursor.getColumnIndex("firstName");
+            int lnameIndex = cursor.getColumnIndex("lastName");
+
+//            int imageIndex = cursor.getColumnIndex("image");
+
+            if (idIndex != -1 && emailIndex != -1 && passwordIndex != -1) {
+                user = new User();
+                user.setId(cursor.getLong(idIndex));
+
+                user.setEmail(cursor.getString(emailIndex));
+                user.setPassword(cursor.getString(passwordIndex));
+
+                user.setMajor(cursor.getString(majorIndex));
+                user.setFirstName(cursor.getString(fnameIndex));
+                Log.d("Test 2", "Setting user fname to " + fnameIndex);
+                user.setLastName(cursor.getString(lnameIndex));
+
+                user.setBirthYear(cursor.getInt(birthYearIndex));
+                user.setBirthMonth(cursor.getInt(birthMonthIndex));
+                user.setBirthDate(cursor.getInt(birthDateIndex));
+//                user.setImage(cursor.getBlob(imageIndex));
+            }
+        }
+
+        cursor.close();
+        db.close();
+
+        return user;
+    }
+
     public int updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

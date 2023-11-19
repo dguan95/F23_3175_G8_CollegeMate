@@ -71,7 +71,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
 
 
-                    if (dbHelper.getUser(email, password) != null){
+                    if (dbHelper.getUser(email) != null){
                         Toast.makeText(SignUpActivity.this, "This user already exists.", Toast.LENGTH_SHORT).show();
                         return;
                     }
