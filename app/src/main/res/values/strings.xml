@@ -63,7 +63,7 @@
     <string name="btnPayRent">Pay Housing</string>
     <string name="btnModifyHousing">Modify Housing</string>
     <string name="btnText">btn gallery</string>
-    <string name="tedLink"><a href="https://www.ted.com/">LINK</a></string>
+    <string name="tedLink"><a href="https://www.ted.com/">Boost your creativity with  TED Talks</a></string>
     <string name="courseEraLink"><a href="https://www.coursera.org/">Revise and review your own paper</a>
     </string>
     <string name="LifeHLink"><a href="https://www.lifehack.org/">Articles written by experts and free courses</a>
@@ -77,10 +77,5 @@
     <string name="lhealthLineLink"><a href="https://www.healthline.com/">Cope with most common problems that students face</a>
     </string>
     <string name="txtUsefulWeb">Useful Websites For Students</string>
-
-    <string name="tedLink1"><a href="https://www.ted.com/">Boost your creativity with  TED Talks</a>
-    </string>
-
-
 
 </resources>

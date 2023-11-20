@@ -32,13 +32,10 @@
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
-
         <activity
             android:name=".SearchActivity"
             android:exported="false" />
 
-        <service android:name=".services.ClosingService"
-            android:stopWithTask="false"/>
 
         <activity
             android:name=".LoginActivity"

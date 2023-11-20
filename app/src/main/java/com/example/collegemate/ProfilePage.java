@@ -56,13 +56,6 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
 
         dbHelper = new DBHelper(this);
 
-        Button btn = findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfilePage.this, ResourceSharingActivity.class));
-            }
-        });
 
 
         bottomNavigationView=findViewById(R.id.BottomNavigationView);
@@ -75,12 +68,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         Bundle bundle = i.getExtras();
             Log.d("TEST", "HERE 1");
 
-//        if (sharedPreferences.contains("FNAME") && sharedPreferences.contains("LNAME")
-//                && sharedPreferences.contains("MAJOR") && sharedPreferences.contains("DOB")) {
-//            Log.d("LOADING STATE", "FNAME: " + sharedPreferences.getString("FNAME", "none"));
-//            loadState();
-//
-//        } else {
+
 
             if (bundle != null && bundle.getString("FNAME") != null) {
                 String fName = bundle.getString("FNAME");
@@ -107,7 +95,6 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
 //
 //                User user = dbHelper.getUser(email, password);
                     Log.d("GETTING USER", "asfsafsa");
-
                     User user = (User) getIntent().getSerializableExtra("user");
 
                     if (user != null) {
@@ -124,10 +111,10 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                             Log.d("LOADING STATE", "FNAME: " + sharedPreferences.getString("FNAME", "none"));
                             loadState();
                         } else {
-                            txtViewFName.setText("B");
-                            TxtViewLName.setText("A");
-                            TxtViewMajor.setText("R");
-                            TxtViewDOB.setText("K");
+                            txtViewFName.setText("name");
+                            TxtViewLName.setText("last name");
+                            TxtViewMajor.setText("major");
+                            TxtViewDOB.setText("DOB");
                         }
                     }
                 } else {
@@ -137,10 +124,10 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                         Log.d("LOADING STATE", "FNAME: " + sharedPreferences.getString("FNAME", "none"));
                         loadState();
                     } else {
-                        txtViewFName.setText("B");
-                        TxtViewLName.setText("A");
-                        TxtViewMajor.setText("C");
-                        TxtViewDOB.setText("R");
+                        txtViewFName.setText("name");
+                        TxtViewLName.setText("last name");
+                        TxtViewMajor.setText("major");
+                        TxtViewDOB.setText("DOB");
                     }
                 }
             }

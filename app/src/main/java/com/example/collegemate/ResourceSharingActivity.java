@@ -1,17 +1,27 @@
 package com.example.collegemate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.view.MenuItem;
 import android.widget.TextView;
 
-public class ResourceSharingActivity extends AppCompatActivity {
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+public class ResourceSharingActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource_sharing);
+        bottomNavigationView=findViewById(R.id.BottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.home_page);
+
 
         TextView tedLink = findViewById(R.id.txtViewTedLink);
         tedLink.setMovementMethod(LinkMovementMethod.getInstance());
@@ -35,5 +45,30 @@ public class ResourceSharingActivity extends AppCompatActivity {
         studyfyLink.setMovementMethod(LinkMovementMethod.getInstance());
 
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int menuItemId = item.getItemId();
+
+        if (menuItemId == R.id.home_page){
+            return true;
+        } else if (menuItemId == R.id.chat_page){
+            startActivity(new Intent(ResourceSharingActivity.this, QuizActivity.class));
+            return true;
+        } else if (menuItemId == R.id.search_page){
+            startActivity(new Intent(ResourceSharingActivity.this, SearchActivity.class));
+            return true;
+        } else if (menuItemId == R.id.profile_page){
+            startActivity(new Intent(ResourceSharingActivity.this, ProfilePage.class));
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }

@@ -70,8 +70,7 @@ public class ProfileCreationActivity extends AppCompatActivity {
 
         ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
                 registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
-                    // Callback is invoked after the user selects a media item or closes the
-                    // photo picker.
+
                     if (uri != null) {
                         Log.d("PhotoPicker", "Selected URI: " + uri);
                         imgView.setImageURI(uri);
