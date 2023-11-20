@@ -67,9 +67,9 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Login or Password is not correct", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
-                    mainIntent.putExtra("userId", user.getId());
-                    startActivity(mainIntent);
+                    Intent i = new Intent(LoginActivity.this, ProfilePage.class);
+                    i.putExtra("user", user);
+                    startActivity(i);
                 }
             }
         });
@@ -91,9 +91,9 @@ public class LoginActivity extends AppCompatActivity {
         GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
 
         if (googleSignInAccount != null) {
-            //userEmail=googleSignInAccount.getEmail();
-
-            finish();
+            userEmail=googleSignInAccount.getEmail();
+            Toast.makeText(this, "Google Email: " + userEmail, Toast.LENGTH_SHORT).show();
+//            finish();
         }
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -105,11 +105,26 @@ public class LoginActivity extends AppCompatActivity {
                         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
                         try {
-
-
-                            task.getResult(ApiException.class);
+                            GoogleSignInAccount googleAccount = task.getResult(ApiException.class);
                             finish();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                            Intent intent;
+                            if (googleSignInAccount != null) {
+                                intent = new Intent(LoginActivity.this, ProfilePage.class);
+
+                                User user = dbHelper.getUser(googleSignInAccount.getEmail(), "google");
+                                intent.putExtra("user", user);
+                            } else {
+                                User user = new User(googleAccount.getEmail(), "google");
+
+                                dbHelper.addUser(user);
+
+                                intent = new Intent(LoginActivity.this, ProfileCreationActivity.class);
+                                intent.putExtra("user", user);
+                            }
+//                            userEmail = googleSignInAccount.getEmail();
+//                            Toast.makeText(LoginActivity.this, "Successfully Signed in as " + userEmail, Toast.LENGTH_SHORT).show();
+
                             startActivity(intent);
                         } catch (ApiException e) {
                             Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
