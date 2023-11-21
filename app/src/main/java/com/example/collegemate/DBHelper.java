@@ -219,5 +219,26 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return rowsAffected;
     }
+    public long getUserIdByEmail(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        long userId = -1;
+
+        String[] columns = {"_id"}; // Use "_id" instead of "userId" in the projection
+        String selection = "email=?";
+        String[] selectionArgs = {email};
+
+        Cursor cursor = db.query("Users", columns, selection, selectionArgs, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex("_id");
+            if (idIndex != -1) { // Check if the column exists
+                userId = cursor.getLong(idIndex);
+            }
+            cursor.close();
+        }
+
+        return userId;
+    }
+
 }
 
