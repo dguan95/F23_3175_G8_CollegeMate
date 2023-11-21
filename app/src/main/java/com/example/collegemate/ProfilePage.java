@@ -68,7 +68,10 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         if (intent != null && intent.hasExtra("userId")) {
             long userId = intent.getLongExtra("userId", -1);
             Log.d("ProfilePageActivity", "Retrieved userId: " + userId);
+
         }
+
+
 
         Intent i = getIntent();
         Bundle bundle = i.getExtras();

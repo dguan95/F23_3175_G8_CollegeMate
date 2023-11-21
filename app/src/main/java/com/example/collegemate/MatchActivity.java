@@ -45,10 +45,10 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
             if (user != null) {
                 String firstName = user.getFirstName();
                 String major = user.getMajor();
-
+                Log.d("ProfilePageActivity", "Retrieved username: " + user.getFirstName());
                 // Now you can set these details to your TextViews
-               // TextViewNameMatchActivity.setText(firstName);
-               // TextViewInfoMatchActivity.setText(major);
+                //txtViewFName.setText(firstName);
+                //TxtViewMajor.setText(major);
             }
         }
 
