@@ -52,7 +52,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             startActivity(new Intent(MainActivity.this, SearchActivity.class));
             return true;
         } else if (menuItemId == R.id.profile_page){
-            startActivity(new Intent(MainActivity.this, ProfilePage.class));
+            Intent quizIntent = new Intent(MainActivity.this, ProfilePage.class);
+            long userId = getIntent().getLongExtra("userId", -1); // Get the userId passed from LoginActivity
+            quizIntent.putExtra("userId", userId); // Pass the userId to QuizActivity
+            startActivity(quizIntent);
             return true;
         }
 

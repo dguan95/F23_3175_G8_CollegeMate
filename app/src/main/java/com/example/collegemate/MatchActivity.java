@@ -24,6 +24,7 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
     List<GalleryImageMatchActivity> ImageList = new ArrayList<>();
     TextView TextViewNameMatchActivity;
     TextView TextViewInfoMatchActivity;
+    DBHelper dbHelper;
 
     int SelectedInd;
     BottomNavigationView bottomNavigationView;
@@ -35,11 +36,20 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
         bottomNavigationView=findViewById(R.id.BottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.chat_page);
-
+        dbHelper = new DBHelper(this);
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("userId")) {
             long userId = intent.getLongExtra("userId", -1);
             Log.d("MatchActivity", "Retrieved userId: " + userId);
+            User user = dbHelper.getUserById(userId);
+            if (user != null) {
+                String firstName = user.getFirstName();
+                String major = user.getMajor();
+
+                // Now you can set these details to your TextViews
+               // TextViewNameMatchActivity.setText(firstName);
+               // TextViewInfoMatchActivity.setText(major);
+            }
         }
 
         AddData();

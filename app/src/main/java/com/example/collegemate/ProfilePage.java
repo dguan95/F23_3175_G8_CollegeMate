@@ -64,6 +64,12 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
 
         sharedPreferences = getPreferences(Context.MODE_PRIVATE);
 
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("userId")) {
+            long userId = intent.getLongExtra("userId", -1);
+            Log.d("ProfilePageActivity", "Retrieved userId: " + userId);
+        }
+
         Intent i = getIntent();
         Bundle bundle = i.getExtras();
             Log.d("TEST", "HERE 1");
@@ -180,10 +186,16 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         int menuItemId = item.getItemId();
 
         if (menuItemId == R.id.home_page){
-            startActivity(new Intent(ProfilePage.this, MainActivity.class));
+            Intent quizIntent = new Intent(ProfilePage.this,  MainActivity.class);
+            long userId = getIntent().getLongExtra("userId", -1);
+            quizIntent.putExtra("userId", userId);
+            startActivity(quizIntent);
             return true;
         } else if (menuItemId == R.id.chat_page){
-            startActivity(new Intent(ProfilePage.this, MatchActivity.class));
+            Intent quizIntent = new Intent(ProfilePage.this,  MatchActivity.class);
+            long userId = getIntent().getLongExtra("userId", -1);
+            quizIntent.putExtra("userId", userId);
+            startActivity(quizIntent);
             return true;
         } else if (menuItemId == R.id.search_page){
             startActivity(new Intent(ProfilePage.this, SearchActivity.class));
