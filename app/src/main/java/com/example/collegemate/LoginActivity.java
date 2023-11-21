@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnSignIn;
     Button btnSignUp;
     DBHelper dbHelper;
+    String userEmail="";
 
     GoogleSignInButton googleSignInButton;
     GoogleSignInOptions googleSignInOptions;
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         inputEmail = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPassword);
+        inputPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
         btnSignIn = findViewById(R.id.btnSignIn);
         btnSignUp = findViewById(R.id.btnSignUp);
@@ -64,9 +67,9 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Login or Password is not correct", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
-                    mainIntent.putExtra("userId", user.getId()); // Pass the userId to MainActivity
-                    startActivity(mainIntent);
+                    Intent i = new Intent(LoginActivity.this, ProfilePage.class);
+                    i.putExtra("user", user);
+                    startActivity(i);
                 }
             }
         });
@@ -79,13 +82,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
         GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
 
         if (googleSignInAccount != null) {
-            finish();
+            userEmail=googleSignInAccount.getEmail();
+            Toast.makeText(this, "Google Email: " + userEmail, Toast.LENGTH_SHORT).show();
+//            finish();
         }
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -97,9 +105,26 @@ public class LoginActivity extends AppCompatActivity {
                         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
                         try {
-                            task.getResult(ApiException.class);
+                            GoogleSignInAccount googleAccount = task.getResult(ApiException.class);
                             finish();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                            Intent intent;
+                            if (googleSignInAccount != null) {
+                                intent = new Intent(LoginActivity.this, ProfilePage.class);
+
+                                User user = dbHelper.getUser(googleSignInAccount.getEmail(), "google");
+                                intent.putExtra("user", user);
+                            } else {
+                                User user = new User(googleAccount.getEmail(), "google");
+
+                                dbHelper.addUser(user);
+
+                                intent = new Intent(LoginActivity.this, ProfileCreationActivity.class);
+                                intent.putExtra("user", user);
+                            }
+//                            userEmail = googleSignInAccount.getEmail();
+//                            Toast.makeText(LoginActivity.this, "Successfully Signed in as " + userEmail, Toast.LENGTH_SHORT).show();
+
                             startActivity(intent);
                         } catch (ApiException e) {
                             Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -111,8 +136,16 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+              // Bundle bundle = new Bundle();
+               //bundle.putString("USER", userEmail);
                 Intent signInIntent = googleSignInClient.getSignInIntent();
+
+
+                //signInIntent.putExtras(bundle);
                 activityResultLauncher.launch(signInIntent);
+
             }
         });
     }

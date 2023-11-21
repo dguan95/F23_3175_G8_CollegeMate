@@ -25,6 +25,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
@@ -67,11 +70,18 @@ public class ProfileCreationActivity extends AppCompatActivity {
 
         ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
                 registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
-                    // Callback is invoked after the user selects a media item or closes the
-                    // photo picker.
+
                     if (uri != null) {
                         Log.d("PhotoPicker", "Selected URI: " + uri);
                         imgView.setImageURI(uri);
+                        Glide.with(this)
+                                .load(uri)
+                                .transform(new CircleCrop())
+                                .into(imgView);
+//                        Glide.with(this)
+//                                .load(uri)
+//                                .transform(new RoundedCorners(imgView.getWidth() / 2))
+//                                .into(imgView);
                     } else {
                         Log.d("PhotoPicker", "No media selected");
                     }
