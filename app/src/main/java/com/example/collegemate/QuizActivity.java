@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 public class QuizActivity extends AppCompatActivity {
     int index=0;
-    long userId = -1;
+    long userId;
     TextView textViewQuizInfo;
     DBHelper dbHelper;
     @Override
@@ -280,7 +280,7 @@ public class QuizActivity extends AppCompatActivity {
                     int[] retrievedAnswers = dbHelper.getQuizAnswersForUser(userId);
 
 
-                    Log.d("QuizAnswers", "Retrieved Answers: " + Arrays.toString(retrievedAnswers) +" " +userId + Arrays.toString(answers));
+                    Log.d("QuizAnswers", "Retrieved Answers: " + Arrays.toString(retrievedAnswers) +" " +userId + " "+ Arrays.toString(answers));
                     startActivity(new Intent(QuizActivity.this, MatchActivity.class));
                     break;
             }
