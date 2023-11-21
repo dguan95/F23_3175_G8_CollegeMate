@@ -25,6 +25,7 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
     TextView TextViewNameMatchActivity;
     TextView TextViewInfoMatchActivity;
     DBHelper dbHelper;
+    String firstName;
 
     int SelectedInd;
     BottomNavigationView bottomNavigationView;
@@ -43,7 +44,7 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
             Log.d("MatchActivity", "Retrieved userId: " + userId);
             User user = dbHelper.getUserById(userId);
             if (user != null) {
-                String firstName = user.getFirstName();
+                firstName = user.getFirstName();
                 String major = user.getMajor();
                 Log.d("ProfilePageActivity", "Retrieved username: " + user.getFirstName());
                 // Now you can set these details to your TextViews
@@ -75,7 +76,7 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
     }
 
     private void AddData() {
-        ImageList.add(new GalleryImageMatchActivity("Hey there! I'm Olivia, an avid nature lover and wildlife photographer. My lens captures the raw beauty of our planet, aiming to inspire others to cherish and protect our environment. Join me in this visual journey for a greener, more sustainable world!", "Olivia", R.drawable.user1));
+        ImageList.add(new GalleryImageMatchActivity("Hey there! I'm Olivia, an avid nature lover and wildlife photographer. My lens captures the raw beauty of our planet, aiming to inspire others to cherish and protect our environment. Join me in this visual journey for a greener, more sustainable world!", firstName , R.drawable.user1));
         ImageList.add(new GalleryImageMatchActivity("Namaste! I'm Sophia, a yoga devotee passionate about mindfulness and well-being. Through yoga and meditation, I guide seekers toward inner peace and balance. Join me on the mat for a journey of self-discovery and tranquility", "Sophia", R.drawable.user7));
         ImageList.add(new GalleryImageMatchActivity("Hey folks, I'm Noah, a tech enthusiast and coding wizard. With lines of code, I weave solutions that tackle real-world problems. Exploring how technology shapes our lives, I'm on a mission to create apps that bring positive change to our communities", "Noah", R.drawable.user3));
         ImageList.add(new GalleryImageMatchActivity("Hey foodies! I'm Jackson, a culinary maestro fascinated by flavors. In my kitchen laboratory, I concoct dishes that merge diverse tastes and cultures.", "Jackson", R.drawable.user4));
