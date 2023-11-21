@@ -77,5 +77,15 @@
     <string name="lhealthLineLink"><a href="https://www.healthline.com/">Cope with most common problems that students face</a>
     </string>
     <string name="txtUsefulWeb">Useful Websites For Students</string>
+    <string name="txtPayHousingTitle">Housing Payment</string>
+    <string name="txtPaymentInfoTitle">Payment Details</string>
+    <string name="txtCardholderTitle">Cardholder name</string>
+    <string name="txtCreditCardNum">Credit card number</string>
+    <string name="txtCVVTitle">CVV</string>
+    <string name="txtCardExpiration">Credit card expiration date</string>
+    <string name="txtPostalCode">Postal Code</string>
+    <string name="btnPayHousing">Submit Payment</string>
+    <string name="txtBillingInfoTitle">Billing Information</string>
+    <string name="txtFullNameTitle">Full Name</string>
 
 </resources>

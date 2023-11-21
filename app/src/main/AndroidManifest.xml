@@ -6,15 +6,18 @@
 
     <application
         android:allowBackup="true"
+        android:background="@drawable/community_involvement"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:background="@drawable/community_involvement"
         android:theme="@style/Theme.CollegeMate"
         tools:targetApi="31">
+        <activity
+            android:name=".HousingPayment"
+            android:exported="false" />
         <activity
             android:name=".ResourceSharingActivity"
             android:exported="false" />
@@ -36,8 +39,6 @@
         <activity
             android:name=".SearchActivity"
             android:exported="false" />
-
-
         <activity
             android:name=".LoginActivity"
             android:exported="false" /> <!-- <activity -->
@@ -47,12 +48,9 @@
         <activity
             android:name=".MatchActivity"
             android:exported="false" />
-
-
         <activity
             android:name=".QuizActivity"
             android:exported="false" />
-
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
