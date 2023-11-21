@@ -1,31 +1,49 @@
 package com.example.collegemate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatchActivity extends AppCompatActivity implements RecyclerViewMatchAdapter.OnItemClickListener {
+public class MatchActivity extends AppCompatActivity implements RecyclerViewMatchAdapter.OnItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
     List<GalleryImageMatchActivity> ImageList = new ArrayList<>();
     TextView TextViewNameMatchActivity;
     TextView TextViewInfoMatchActivity;
 
     int SelectedInd;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
+        bottomNavigationView=findViewById(R.id.BottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.chat_page);
+
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("userId")) {
+            long userId = intent.getLongExtra("userId", -1);
+            Log.d("MatchActivity", "Retrieved userId: " + userId);
+        }
+
         AddData();
+
 
         RecyclerView recyclerViewImages = findViewById(R.id.RecyclerViewMatchActivity);
         TextViewNameMatchActivity = findViewById(R.id.textViewNameMatchActivity);
@@ -62,5 +80,36 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
             TextViewNameMatchActivity.setText(ImageList.get(i).getImgName());
             TextViewInfoMatchActivity.setText(ImageList.get(i).getInfo());
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int menuItemId = item.getItemId();
+
+        if (menuItemId == R.id.home_page){
+            Intent quizIntent = new Intent(MatchActivity.this,  MainActivity.class);
+            long userId = getIntent().getLongExtra("userId", -1);
+            quizIntent.putExtra("userId", userId);
+            startActivity(quizIntent);
+            return true;
+        } else if (menuItemId == R.id.chat_page){
+
+            return true;
+        } else if (menuItemId == R.id.search_page){
+            startActivity(new Intent(MatchActivity.this, SearchActivity.class));
+            return true;
+        } else if (menuItemId == R.id.profile_page){
+            Intent intent = new Intent(MatchActivity.this, ProfilePage.class);
+            long userId = getIntent().getLongExtra("userId", -1); // Get the userId passed from LoginActivity
+            intent.putExtra("userId", userId); // Pass the userId to ProfilePage
+            startActivity(intent);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }

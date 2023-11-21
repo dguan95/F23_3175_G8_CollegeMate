@@ -281,7 +281,9 @@ public class QuizActivity extends AppCompatActivity {
 
 
                     Log.d("QuizAnswers", "Retrieved Answers: " + Arrays.toString(retrievedAnswers) +" " +userId + " "+ Arrays.toString(answers));
-                    startActivity(new Intent(QuizActivity.this, MatchActivity.class));
+                    Intent matchIntent = new Intent(QuizActivity.this, MatchActivity.class);
+                    matchIntent.putExtra("userId", userId); // Pass the userId to MatchActivity
+                    startActivity(matchIntent);
                     break;
             }
 

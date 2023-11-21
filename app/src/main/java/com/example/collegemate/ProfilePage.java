@@ -183,7 +183,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
             startActivity(new Intent(ProfilePage.this, MainActivity.class));
             return true;
         } else if (menuItemId == R.id.chat_page){
-            startActivity(new Intent(ProfilePage.this, ChatActivity.class));
+            startActivity(new Intent(ProfilePage.this, MatchActivity.class));
             return true;
         } else if (menuItemId == R.id.search_page){
             startActivity(new Intent(ProfilePage.this, SearchActivity.class));

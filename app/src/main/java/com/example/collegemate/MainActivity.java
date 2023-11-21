@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (menuItemId == R.id.home_page){
             return true;
         } else if (menuItemId == R.id.chat_page){
-            Intent quizIntent = new Intent(MainActivity.this, QuizActivity.class);
+            Intent quizIntent = new Intent(MainActivity.this, MatchActivity.class);
             long userId = getIntent().getLongExtra("userId", -1); // Get the userId passed from LoginActivity
             quizIntent.putExtra("userId", userId); // Pass the userId to QuizActivity
             startActivity(quizIntent);
