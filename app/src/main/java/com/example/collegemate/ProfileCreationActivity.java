@@ -203,7 +203,10 @@ public class ProfileCreationActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(ProfileCreationActivity.this, ProfilePage.class);
                     intent.putExtras(bundle);
+                    intent.putExtra("userId", userId);
                     startActivity(intent);
+
+
 
 
                 }

@@ -54,6 +54,9 @@ public class LoginActivity extends AppCompatActivity {
 
         Log.d("Test", "Login Activity Opened");
 
+
+
+
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,13 +65,14 @@ public class LoginActivity extends AppCompatActivity {
                 String password = inputPassword.getText().toString();
 
                 User user = dbHelper.getUser(email, password);
-
+                long userId = dbHelper.getUserIdByEmail(email);
                 if (user == null) {
                     Toast.makeText(LoginActivity.this, "Login or Password is not correct", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     Intent i = new Intent(LoginActivity.this, ProfilePage.class);
                     i.putExtra("user", user);
+                    i.putExtra("userId", userId);
                     startActivity(i);
                 }
             }
