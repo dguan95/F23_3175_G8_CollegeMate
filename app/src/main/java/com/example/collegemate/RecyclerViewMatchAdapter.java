@@ -89,8 +89,6 @@ public class RecyclerViewMatchAdapter
                 public void onClick(View view) {
                     onItemClickListener.onItemClick(getAdapterPosition());
                     SelectedInd = getAdapterPosition();
-                    //when notifydatasetchanged is called,
-                    // getAdapterPosition() goes back to -1
                     notifyDataSetChanged();
                 }
             });

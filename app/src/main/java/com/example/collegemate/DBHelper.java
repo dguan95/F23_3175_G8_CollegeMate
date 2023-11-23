@@ -245,7 +245,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.query(
                 "users",  // Table name
-                new String[]{"_id", "firstName", "major"},
+                new String[]{"_id", "firstName", "major","image"},
                 "_id=?",  // Selection criteria
                 new String[]{String.valueOf(userId)},
                 null, null, null
@@ -256,11 +256,14 @@ public class DBHelper extends SQLiteOpenHelper {
             int idIndex = cursor.getColumnIndex("_id");
             int firstNameIndex = cursor.getColumnIndex("firstName");
             int majorIndex = cursor.getColumnIndex("major");
+            int imageIndex = cursor.getColumnIndex("image");
 
-            if (idIndex != -1 && firstNameIndex != -1 && majorIndex != -1) {
+            if (idIndex != -1 && firstNameIndex != -1 && majorIndex != -1 && imageIndex != -1) {
                 user.setId(cursor.getLong(idIndex));
                 user.setFirstName(cursor.getString(firstNameIndex));
                 user.setMajor(cursor.getString(majorIndex));
+                byte[] imageBytes = cursor.getBlob(imageIndex);
+                user.setImage(imageBytes);
             } else {
                 Log.e("CursorError", "Column indices not found");
             }
