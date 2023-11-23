@@ -64,9 +64,9 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
 
         sharedPreferences = getPreferences(Context.MODE_PRIVATE);
 
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("userId")) {
-            long userId = intent.getLongExtra("userId", -1);
+        Intent intent1 = getIntent();
+        if (intent1 != null && intent1.hasExtra("userId")) {
+            long userId = intent1.getLongExtra("userId", -1);
             Log.d("ProfilePageActivity", "Retrieved userId: " + userId);
 
         }

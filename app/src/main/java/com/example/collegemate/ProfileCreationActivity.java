@@ -68,8 +68,8 @@ public class ProfileCreationActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         imgView = findViewById(R.id.imgViewProfilIcon);
         btnGallery = findViewById(R.id.btnOpenGallery);
-        Intent intent = getIntent();
-        String userEmail = intent.getStringExtra("email");
+        Intent intent2 = getIntent();
+        String userEmail = intent2.getStringExtra("email");
         long userId = dbHelper.getUserIdByEmail(userEmail);
         Log.d("ProfileCreation", "Retrieved userId: " + userId);
 
@@ -201,9 +201,9 @@ public class ProfileCreationActivity extends AppCompatActivity {
                     bundle.putString("MONTH", monthString);
                     bundle.putString("YEAR",yearString);
 
-                    Intent Nextintent = new Intent(ProfileCreationActivity.this, QuizActivity.class);
-                    Nextintent.putExtra("userId", userId);
-                    startActivity(Nextintent);
+                    Intent intent = new Intent(ProfileCreationActivity.this, ProfilePage.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
 
 
                 }
