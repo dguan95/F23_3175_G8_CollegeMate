@@ -239,5 +239,62 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return rowsAffected;
     }
+    public long getUserIdByEmail(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        long userId = -1;
+
+        String[] columns = {"_id"};
+        String selection = "email=?";
+        String[] selectionArgs = {email};
+
+        Cursor cursor = db.query("Users", columns, selection, selectionArgs, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex("_id");
+            if (idIndex != -1) {
+                userId = cursor.getLong(idIndex);
+            }
+            cursor.close();
+        }
+
+        return userId;
+    }
+    public User getUserById(long userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        User user = null;
+
+        Cursor cursor = db.query(
+                "users",  // Table name
+                new String[]{"_id", "firstName", "major","image"},
+                "_id=?",  // Selection criteria
+                new String[]{String.valueOf(userId)},
+                null, null, null
+        );
+
+        if (cursor != null && cursor.moveToFirst()) {
+            user = new User();
+            int idIndex = cursor.getColumnIndex("_id");
+            int firstNameIndex = cursor.getColumnIndex("firstName");
+            int majorIndex = cursor.getColumnIndex("major");
+            int imageIndex = cursor.getColumnIndex("image");
+
+            if (idIndex != -1 && firstNameIndex != -1 && majorIndex != -1 && imageIndex != -1) {
+                user.setId(cursor.getLong(idIndex));
+                user.setFirstName(cursor.getString(firstNameIndex));
+                user.setMajor(cursor.getString(majorIndex));
+                byte[] imageBytes = cursor.getBlob(imageIndex);
+                user.setImage(imageBytes);
+            } else {
+                Log.e("CursorError", "Column indices not found");
+            }
+            cursor.close();
+        } else {
+            Log.e("CursorError", "Cursor is null or empty");
+        }
+
+        db.close();
+        return user;
+    }
+
 }
 

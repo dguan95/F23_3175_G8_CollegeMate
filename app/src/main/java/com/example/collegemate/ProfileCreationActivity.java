@@ -48,6 +48,7 @@ public class ProfileCreationActivity extends AppCompatActivity {
     Spinner month;
     EditText major;
     Button btnCreateProfile;
+    long userId;
     int yearInt=0;
 
     ActivityResultLauncher<Intent> resultLauncher;
@@ -67,6 +68,10 @@ public class ProfileCreationActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         imgView = findViewById(R.id.imgViewProfilIcon);
         btnGallery = findViewById(R.id.btnOpenGallery);
+        Intent intent2 = getIntent();
+        String userEmail = intent2.getStringExtra("email");
+        long userId = dbHelper.getUserIdByEmail(userEmail);
+        Log.d("ProfileCreation", "Retrieved userId: " + userId);
 
         ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
                 registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
@@ -198,12 +203,18 @@ public class ProfileCreationActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(ProfileCreationActivity.this, ProfilePage.class);
                     intent.putExtras(bundle);
+                    intent.putExtra("userId", userId);
                     startActivity(intent);
+
+
+
+
                 }
                 catch(Exception ex)
                 {
                     ex.printStackTrace();
                     Log.d("Profile Creation Error", ex.getMessage());
+
                 }
         });
     }

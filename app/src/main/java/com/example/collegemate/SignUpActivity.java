@@ -77,9 +77,10 @@ public class SignUpActivity extends AppCompatActivity {
                     }
 
                     dbHelper.addUser(user);
-
+                    long _id = dbHelper.getUserIdByEmail(email);
                     Intent i = new Intent(SignUpActivity.this,ProfileCreationActivity.class);
                     i.putExtra("user", user);
+                    i.putExtra("email", email);
 
                     Toast.makeText(SignUpActivity.this, "User created!", Toast.LENGTH_SHORT).show();
                     finish();

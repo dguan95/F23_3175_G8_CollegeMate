@@ -2,8 +2,8 @@ package com.example.collegemate;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,10 +28,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home_page);
 
-        /*Intent i = getIntent();
-        Bundle bundle = i.getExtras();
-        String user = bundle.getString("USER");
-        Toast.makeText(this, "user"+ user, Toast.LENGTH_SHORT).show();*/
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("userId")) {
+            long userId = intent.getLongExtra("userId", -1);
+            Log.d("MainActivity", "Retrieved userId: " + userId);
+        }
 
     }
 
@@ -42,16 +43,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (menuItemId == R.id.home_page){
             return true;
         } else if (menuItemId == R.id.chat_page){
-            Intent quizIntent = new Intent(MainActivity.this, QuizActivity.class);
-            long userId = getIntent().getLongExtra("userId", -1); // Get the userId passed from LoginActivity
-            quizIntent.putExtra("userId", userId); // Pass the userId to QuizActivity
+            Intent quizIntent = new Intent(MainActivity.this, MatchActivity.class);
+            long userId = getIntent().getLongExtra("userId", -1);
+            quizIntent.putExtra("userId", userId);
             startActivity(quizIntent);
             return true;
         } else if (menuItemId == R.id.search_page){
             startActivity(new Intent(MainActivity.this, SearchActivity.class));
             return true;
         } else if (menuItemId == R.id.profile_page){
-            startActivity(new Intent(MainActivity.this, ProfilePage.class));
+            Intent quizIntent = new Intent(MainActivity.this, ProfilePage.class);
+            long userId = getIntent().getLongExtra("userId", -1);
+            quizIntent.putExtra("userId", userId);
+            startActivity(quizIntent);
             return true;
         }
 

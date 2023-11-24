@@ -3,12 +3,23 @@ package com.example.collegemate;
 public class GalleryImageMatchActivity {
     private String Info;
     private String ImgName;
+
+    private String major;
     private int ImgPic;
 
-    public GalleryImageMatchActivity(String imgId, String imgName, int imgPic) {
-        Info = imgId;
+    public GalleryImageMatchActivity(String info, String imgName, int imgPic, String major) {
+        Info = info;
         ImgName = imgName;
         ImgPic = imgPic;
+        this.major = major;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
     }
 
     public String getInfo() {

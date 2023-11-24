@@ -5,6 +5,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -88,8 +89,6 @@ public class RecyclerViewMatchAdapter
                 public void onClick(View view) {
                     onItemClickListener.onItemClick(getAdapterPosition());
                     SelectedInd = getAdapterPosition();
-                    //when notifydatasetchanged is called,
-                    // getAdapterPosition() goes back to -1
                     notifyDataSetChanged();
                 }
             });
