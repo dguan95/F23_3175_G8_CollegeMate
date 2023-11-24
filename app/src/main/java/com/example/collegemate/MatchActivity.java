@@ -77,6 +77,7 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
         ImageList.add(new GalleryImageMatchActivity("Hey foodies! I'm Jackson, a culinary maestro fascinated by flavors. In my kitchen laboratory, I concoct dishes that merge diverse tastes and cultures.", "Jackson", R.drawable.user4, major));
         ImageList.add(new GalleryImageMatchActivity("Greetings, fellow history buffs! I'm Oliver, a passionate historian and storyteller. Delving into ancient civilizations", "Oliver", R.drawable.user6, major));
         ImageList.add(new GalleryImageMatchActivity("Hola! I'm Amelia, a fashion entrepreneur with a green heart. I'm on a mission to revolutionize fashion by blending style with sustainability.", "Amelia", R.drawable.user2, major));
+
     }
 
     @Override
