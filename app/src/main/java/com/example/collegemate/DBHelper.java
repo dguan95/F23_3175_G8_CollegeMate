@@ -15,6 +15,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "CollegeMateDatabase";
     private static final int DATABASE_VERSION = 4; //i incremented when make changes
 
+
+    //create table in DB
     private static final String TABLE_USERS_CREATE = "CREATE TABLE users " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "email TEXT UNIQUE, " +
@@ -55,6 +57,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+
+
+    // drop the table when version is changed
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS users");
@@ -63,12 +68,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+
+    //add user to the DB
     public long addUser(User user) {
+        //used to write to DB
         SQLiteDatabase db = this.getWritableDatabase();
+        //class to include values in insert statement easier
         ContentValues values = new ContentValues();
         values.put("email", user.getEmail());
         values.put("password", user.getPassword());
 
+        //simplifies SQL insert statement
         long userId = db.insert("users", null, values);
         db.close();
         return userId;
@@ -106,13 +116,19 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+    //finds and return user using email and password
     public User getUser(String email, String password) {
+        //used to read from DB
         SQLiteDatabase db = this.getReadableDatabase();
         User user = null;
 
+
+        //cursor goes through records inside DB and finds the appropriate one
+        // simplifies SQL select statement(SELECT FROM users where email and password = passed values)
         Cursor cursor = db.query("users", null, "email = ? AND password = ?",
                 new String[]{email, password}, null, null, null);
 
+        //goes to the first instance found
         if (cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex("_id");
             int emailIndex = cursor.getColumnIndex("email");
@@ -127,6 +143,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
 //            int imageIndex = cursor.getColumnIndex("image");
 
+            //-1 = not found
+            //if records in DB dound -> collect all info into 1 user object
             if (idIndex != -1 && emailIndex != -1 && passwordIndex != -1) {
                 user = new User();
                 user.setId(cursor.getLong(idIndex));
@@ -152,6 +170,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return user;
     }
 
+    //same method as previous, but uses email only
     public User getUser(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         User user = null;
@@ -198,6 +217,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return user;
     }
 
+    //update user record inside the DB when we fill profile info(FName, LName etc)
     public int updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

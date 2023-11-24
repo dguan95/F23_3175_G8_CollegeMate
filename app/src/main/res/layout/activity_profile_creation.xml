@@ -135,4 +135,18 @@
         app:layout_constraintEnd_toEndOf="@+id/imgViewProfilIcon"
         app:srcCompat="@drawable/baseline_photo_camera_24" />
 
+    <EditText
+        android:id="@+id/editTxtUserDescription"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/txtHintDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerMonth" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
