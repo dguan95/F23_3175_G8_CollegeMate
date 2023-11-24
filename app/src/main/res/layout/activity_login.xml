@@ -39,8 +39,8 @@
       android:layout_width="150dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="32dp"
-      android:background="@drawable/ic_chat_background"
-      android:text="@string/ButtonNavigationChat"
+      android:background="@drawable/custom_btn"
+      android:text="@string/ttxBtnSignIn"
       android:textColor="#222021"
 
       app:backgroundTint="@null"

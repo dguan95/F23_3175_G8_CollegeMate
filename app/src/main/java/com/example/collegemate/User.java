@@ -28,8 +28,33 @@ public class User implements Serializable {
 
     private byte[] image;
 
+    private String desciption;
+
     public User(String email) {
         this.email = email;
+    }
+
+
+    public User(long id, String email, String password, int birthYear, int birthMonth, int birthDate, String firstName, String lastName, String major, byte[] image, String desciption) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.birthYear = birthYear;
+        this.birthMonth = birthMonth;
+        this.birthDate = birthDate;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.major = major;
+        this.image = image;
+        this.desciption = desciption;
+    }
+
+    public String getDesciption() {
+        return desciption;
+    }
+
+    public void setDesciption(String desciption) {
+        this.desciption = desciption;
     }
 
     public User() {

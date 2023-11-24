@@ -27,7 +27,8 @@ public class DBHelper extends SQLiteOpenHelper {
             "firstName TEXT, " +
             "lastName TEXT, " +
             "major TEXT, " +
-            "image BLOB);";
+            "image BLOB," +
+            "description TEXT);";
 
     private static final String TABLE_QUIZ_CREATE = "CREATE TABLE quiz_answers " +
             "(quizid INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -140,6 +141,7 @@ public class DBHelper extends SQLiteOpenHelper {
             int birthMonthIndex = cursor.getColumnIndex("birthMonth");
             int fnameIndex = cursor.getColumnIndex("firstName");
             int lnameIndex = cursor.getColumnIndex("lastName");
+            int descIndex = cursor.getColumnIndex("description");
 
 //            int imageIndex = cursor.getColumnIndex("image");
 
@@ -161,6 +163,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 user.setBirthMonth(cursor.getInt(birthMonthIndex));
                 user.setBirthDate(cursor.getInt(birthDateIndex));
 //                user.setImage(cursor.getBlob(imageIndex));
+                user.setDesciption(cursor.getString(descIndex));
             }
         }
 
@@ -189,6 +192,7 @@ public class DBHelper extends SQLiteOpenHelper {
             int birthMonthIndex = cursor.getColumnIndex("birthMonth");
             int fnameIndex = cursor.getColumnIndex("firstName");
             int lnameIndex = cursor.getColumnIndex("lastName");
+            int descIndex = cursor.getColumnIndex("description");
 
 //            int imageIndex = cursor.getColumnIndex("image");
 
@@ -208,6 +212,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 user.setBirthMonth(cursor.getInt(birthMonthIndex));
                 user.setBirthDate(cursor.getInt(birthDateIndex));
 //                user.setImage(cursor.getBlob(imageIndex));
+                user.setDesciption(cursor.getString(descIndex));
             }
         }
 
@@ -231,6 +236,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("lastName", user.getLastName());
         values.put("major", user.getMajor());
 //        values.put("image", user.getImage());
+        values.put("description", user.getDesciption());
 
         // Updating row
         int rowsAffected = db.update("users", values, "email = ?", new String[]{String.valueOf(user.getEmail())});
@@ -272,7 +278,7 @@ public class DBHelper extends SQLiteOpenHelper {
         );
 
         if (cursor != null && cursor.moveToFirst()) {
-            user = new User();
+           user = new User();
             int idIndex = cursor.getColumnIndex("_id");
             int firstNameIndex = cursor.getColumnIndex("firstName");
             int majorIndex = cursor.getColumnIndex("major");

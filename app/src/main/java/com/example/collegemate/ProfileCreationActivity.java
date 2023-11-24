@@ -43,6 +43,7 @@ public class ProfileCreationActivity extends AppCompatActivity {
     EditText firstName;
     EditText lastName;
     EditText dOB;
+
     EditText year;
     // new branch
     Spinner month;
@@ -50,6 +51,8 @@ public class ProfileCreationActivity extends AppCompatActivity {
     Button btnCreateProfile;
     long userId;
     int yearInt=0;
+
+    EditText description;
 
     ActivityResultLauncher<Intent> resultLauncher;
 
@@ -68,6 +71,9 @@ public class ProfileCreationActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         imgView = findViewById(R.id.imgViewProfilIcon);
         btnGallery = findViewById(R.id.btnOpenGallery);
+
+        description=findViewById(R.id.editTxtUserDescription);
+
         Intent intent2 = getIntent();
         String userEmail = intent2.getStringExtra("email");
         long userId = dbHelper.getUserIdByEmail(userEmail);
@@ -154,6 +160,15 @@ public class ProfileCreationActivity extends AppCompatActivity {
 
                     return;
                 }
+                if(description.getText().toString().isEmpty())
+                {
+                    Toast.makeText(this, "Put some description", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (description.getText().toString().length()>100)
+                {
+                    Toast.makeText(this, "Put some description", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 try {
 
@@ -163,6 +178,8 @@ public class ProfileCreationActivity extends AppCompatActivity {
                     String majorString = major.getText().toString();
                     String yearString = year.getText().toString();
                     String monthString = "";
+                    String descriptionStr = description.getText().toString();
+
 
 //                    BitmapDrawable drawable = (BitmapDrawable) imgView.getDrawable();
 //                    Bitmap bitmap = drawable.getBitmap();
@@ -185,6 +202,7 @@ public class ProfileCreationActivity extends AppCompatActivity {
                     user.setBirthMonth(Integer.parseInt(monthString));
                     user.setBirthYear(Integer.parseInt(yearString));
                     user.setMajor(majorString);
+                    user.setDesciption(descriptionStr);
 
                     try {
                         dbHelper.updateUser(user);
@@ -200,6 +218,7 @@ public class ProfileCreationActivity extends AppCompatActivity {
                     bundle.putString("DAY", dayString);
                     bundle.putString("MONTH", monthString);
                     bundle.putString("YEAR",yearString);
+                    bundle.putString("DESCRIPTION", descriptionStr);
 
                     Intent intent = new Intent(ProfileCreationActivity.this, ProfilePage.class);
                     intent.putExtras(bundle);

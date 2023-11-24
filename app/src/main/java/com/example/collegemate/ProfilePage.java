@@ -31,6 +31,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
     ImageView imageView;
     Button profileSettings;
     DBHelper dbHelper;
+    TextView TxtViewDescription;
     String fNameInstance;
     String lNameInstance;
     String majorInstance;
@@ -53,6 +54,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         TxtViewDOB = findViewById(R.id.txtViewBirth);
         TxtViewMajor = findViewById(R.id.txtViewMajor);
         imageView = findViewById(R.id.imgViewProfilIcon2);
+        TxtViewDescription=findViewById(R.id.txtViewDescription);
 
         dbHelper = new DBHelper(this);
 
@@ -86,6 +88,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                 String day = bundle.getString("DAY");
                 String month = bundle.getString("MONTH");
                 String year = bundle.getString("YEAR");
+                String userDesc = bundle.getString("DESCRIPTION");
 
 //                byte[] image = bundle.getByteArray("IMAGE");
 //                Bitmap bitmap = BitmapFactory.decodeByteArray(image,  0, image.length);
@@ -95,6 +98,8 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                 TxtViewLName.setText(lName);
                 TxtViewMajor.setText(major);
                 TxtViewDOB.setText(day + "-" + month + "-" + year);
+                TxtViewDescription.setText(userDesc);
+
             } else {
                 Log.d("TEST 1", "HERE");
                 if (getIntent() != null) {
@@ -113,6 +118,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                         txtViewFName.setText(user.getFirstName());
                         TxtViewLName.setText(user.getLastName());
                         TxtViewMajor.setText(user.getMajor());
+                        TxtViewDescription.setText(user.getDesciption());
                         TxtViewDOB.setText(user.getBirthDate() + "-" + user.getBirthMonth() + "-" + user.getBirthYear());
                     } else {
                         if (sharedPreferences.contains("FNAME") && sharedPreferences.contains("LNAME")
@@ -124,6 +130,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                             TxtViewLName.setText("last name");
                             TxtViewMajor.setText("major");
                             TxtViewDOB.setText("DOB");
+                            TxtViewDescription.setText("Description");
                         }
                     }
                 } else {
@@ -137,6 +144,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                         TxtViewLName.setText("last name");
                         TxtViewMajor.setText("major");
                         TxtViewDOB.setText("DOB");
+                        TxtViewDescription.setText("Description");
                     }
                 }
             }
@@ -151,6 +159,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         TxtViewLName.setText(sharedPreferences.getString("LNAME", "A"));
         TxtViewMajor.setText(sharedPreferences.getString("MAJOR", "C"));
         TxtViewDOB.setText(sharedPreferences.getString("DOB", "R"));
+        TxtViewDescription.setText(sharedPreferences.getString("DESCRIPTION","D"));
 
 //        String imageString = sharedPreferences.getString("IMAGE", null);
 //
@@ -167,6 +176,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         editor.putString("LNAME", TxtViewLName.getText().toString());
         editor.putString("MAJOR", TxtViewMajor.getText().toString());
         editor.putString("DOB", TxtViewDOB.getText().toString());
+        editor.putString("DESCRIPTION",TxtViewDescription.getText().toString());
 
 //        BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
 //        Bitmap bitmap = drawable.getBitmap();
@@ -226,6 +236,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         savedInstanceState.putString("LNAME", TxtViewLName.getText().toString());
         savedInstanceState.putString("MAJOR", TxtViewMajor.getText().toString());
         savedInstanceState.putString("DOB", TxtViewDOB.getText().toString());
+        savedInstanceState.putString("DESCRIPTION", TxtViewDescription.getText().toString());
 
         super.onSaveInstanceState(savedInstanceState);
     }
