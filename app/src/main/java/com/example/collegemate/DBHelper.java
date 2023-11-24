@@ -253,7 +253,9 @@ public class DBHelper extends SQLiteOpenHelper {
         String selection = "email=?";
         String[] selectionArgs = {email};
 
-        Cursor cursor = db.query("Users", columns, selection, selectionArgs, null, null, null);
+        Cursor cursor = db.query("users", null, "email = ?",
+                new String[]{ email }, null, null, null);
+       // Cursor cursor = db.query("users", columns, selection, selectionArgs, null, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex("_id");
