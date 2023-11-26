@@ -23,12 +23,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerViewMatchActivity"
         android:layout_width="0dp"
-        android:layout_height="400dp"
+        android:layout_height="370dp"
         android:layout_marginTop="8dp"
         android:verticalScrollbarPosition="defaultPosition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTittleMatchActivity" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewYourPoints" />
 
     <TextView
         android:id="@+id/textViewNameMatchActivity"
@@ -95,4 +95,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNameMatchActivity" />
+
+    <TextView
+        android:id="@+id/textViewYourPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTittleMatchActivity" />
 </androidx.constraintlayout.widget.ConstraintLayout>

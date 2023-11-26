@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,9 +26,11 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
     TextView TextViewNameMatchActivity;
     TextView TextViewInfoMatchActivity;
     TextView TextViewRoleMatchActivity;
+    TextView TextViewYourPoints;
     DBHelper dbHelper;
     String firstName;
     String major;
+    String description;
     long test;
 
     long userId;
@@ -36,6 +39,7 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
     Intent intent = getIntent();
     BottomNavigationView bottomNavigationView;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,16 +47,23 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
         bottomNavigationView=findViewById(R.id.BottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.chat_page);
-        dbHelper = new DBHelper(this);
 
+
+        long userId = getIntent().getLongExtra("userId", -1);
+        dbHelper = new DBHelper(this);
+        int totalScore = dbHelper.getTotalScoreForUser(userId);
 
         AddData();
 
 
         RecyclerView recyclerViewImages = findViewById(R.id.RecyclerViewMatchActivity);
         TextViewNameMatchActivity = findViewById(R.id.textViewNameMatchActivity);
+        TextViewYourPoints = findViewById(R.id.textViewYourPoints);
         TextViewInfoMatchActivity = findViewById(R.id.textViewInfoMatchActivity);
         TextViewRoleMatchActivity = findViewById(R.id.textViewRoleMatchActivity);
+        TextViewYourPoints.setText("Your Points: " + totalScore);
+
+
         if (SelectedInd != -1) {
             TextViewNameMatchActivity.setText(ImageList.get(SelectedInd).getImgName());
             TextViewInfoMatchActivity.setText(ImageList.get(SelectedInd).getInfo());
@@ -71,7 +82,7 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
     }
 
     private void AddData() {
-        ImageList.add(new GalleryImageMatchActivity("Hey there! I'm Juliet, an avid nature lover and wildlife photographer. My lens captures the raw beauty of our planet, aiming to inspire others to cherish and protect our environment. Join me in this visual journey for a greener, more sustainable world!", "Juliet" , R.drawable.user1, "BUSINESS LAW"));
+        ImageList.add(new GalleryImageMatchActivity("Hey there! I'm Juliet, an avid nature lover and wildlife photographer. My lens captures the raw beauty of our planet, aiming to inspire others to cherish and protect our environment. Join me in this visual journey for a greener, more sustainable world!", "Juliet" , R.drawable.user1, "BUSINESS LAW - Points: 14"));
         ImageList.add(new GalleryImageMatchActivity("Namaste! I'm Sophia, a yoga devotee passionate about mindfulness and well-being. Through yoga and meditation, I guide seekers toward inner peace and balance. Join me on the mat for a journey of self-discovery and tranquility", "Sophia", R.drawable.user7, major));
         ImageList.add(new GalleryImageMatchActivity("Hey folks, I'm Noah, a tech enthusiast and coding wizard. With lines of code, I weave solutions that tackle real-world problems. Exploring how technology shapes our lives, I'm on a mission to create apps that bring positive change to our communities", "Noah", R.drawable.user3, major));
         ImageList.add(new GalleryImageMatchActivity("Hey foodies! I'm Jackson, a culinary maestro fascinated by flavors. In my kitchen laboratory, I concoct dishes that merge diverse tastes and cultures.", "Jackson", R.drawable.user4, major));
@@ -89,39 +100,57 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
                 TextViewInfoMatchActivity.setText(ImageList.get(i).getInfo());
                 TextViewRoleMatchActivity.setText(ImageList.get(i).getMajor());
             } else if (i==1) {
-                userId=18;
+                userId=1;
                 Log.d("MatchActivity", "Retrieved userId: " + userId);
                 User user = dbHelper.getUserById(userId);
+                int totalScore = dbHelper.getTotalScoreForUser(userId);
                 firstName = user.getFirstName();
                 major = user.getMajor();
+                description = user.getDesciption();
                 Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
                 Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
+                Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
+                Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
                 TextViewNameMatchActivity.setText(firstName);
-                TextViewInfoMatchActivity.setText(ImageList.get(i).getInfo());
-                TextViewRoleMatchActivity.setText(major);
+                TextViewInfoMatchActivity.setText(description);
+                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore);
             }else if (i==2) {
-                userId=19;
+                userId=2;
                 Log.d("MatchActivity", "Retrieved userId: " + userId);
                 User user = dbHelper.getUserById(userId);
+                int totalScore = dbHelper.getTotalScoreForUser(userId);
                 firstName = user.getFirstName();
                 major = user.getMajor();
+                description = user.getDesciption();
                 Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
                 Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
+                Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
+                Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
                 TextViewNameMatchActivity.setText(firstName);
-                TextViewInfoMatchActivity.setText(ImageList.get(i).getInfo());
-                TextViewRoleMatchActivity.setText(major);
+                TextViewInfoMatchActivity.setText(description);
+                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore);
             }else if (i==3) {
-                userId=21;
-                TextViewNameMatchActivity.setText(ImageList.get(i).getImgName());
-                TextViewInfoMatchActivity.setText(ImageList.get(i).getInfo());
-                TextViewRoleMatchActivity.setText(ImageList.get(i).getMajor());
+                userId=3;
+                Log.d("MatchActivity", "Retrieved userId: " + userId);
+                User user = dbHelper.getUserById(userId);
+                int totalScore = dbHelper.getTotalScoreForUser(userId);
+                firstName = user.getFirstName();
+                major = user.getMajor();
+                description = user.getDesciption();
+                Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
+                Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
+                Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
+                Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
+                TextViewNameMatchActivity.setText(firstName);
+                TextViewInfoMatchActivity.setText(description);
+                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore);
             }else if (i==4) {
-                userId=2;
+                userId=4;
                 TextViewNameMatchActivity.setText(ImageList.get(i).getImgName());
                 TextViewInfoMatchActivity.setText(ImageList.get(i).getInfo());
                 TextViewRoleMatchActivity.setText(ImageList.get(i).getMajor());
             }else if (i==5) {
-                userId=3;
+                userId=5;
                 TextViewNameMatchActivity.setText(ImageList.get(i).getImgName());
                 TextViewInfoMatchActivity.setText(ImageList.get(i).getInfo());
                 TextViewRoleMatchActivity.setText(ImageList.get(i).getMajor());

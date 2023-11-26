@@ -43,6 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "answer8 INTEGER, " +
             "answer9 INTEGER, " +
             "answer10 INTEGER, " +
+            "totalScore INTEGER, " +
            "FOREIGN KEY(user_id) REFERENCES users(_id));";
 
 
@@ -93,18 +94,29 @@ public class DBHelper extends SQLiteOpenHelper {
             values.put("answer" + (i + 1), answers[i]);
         }
         long quizId = db.insert("quiz_answers", null, values);
+
+        int totalScore = 0;
+        for (int answer : answers) {
+            totalScore += answer;
+        }
+
+        // Update the totalScore in the database
+        ContentValues totalScoreValues = new ContentValues();
+        totalScoreValues.put("totalScore", totalScore);
+        db.update("quiz_answers", totalScoreValues, "quizid=?", new String[]{String.valueOf(quizId)});
+
         db.close();
         return quizId;
     }
     public int[] getQuizAnswersForUser(long userId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        int[] answers = new int[10];
+        int[] answers = new int[11];
 
         Cursor cursor = db.query("quiz_answers", null, "user_id = ?", new String[]{String.valueOf(userId)},
                 null, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 11; i++) {
                 answers[i] = cursor.getInt(i + 2);
                           }
             cursor.close();
@@ -273,7 +285,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.query(
                 "users",  // Table name
-                new String[]{"_id", "firstName", "major","image"},
+                new String[]{"_id", "firstName", "major","image", "description"},
                 "_id=?",  // Selection criteria
                 new String[]{String.valueOf(userId)},
                 null, null, null
@@ -285,6 +297,7 @@ public class DBHelper extends SQLiteOpenHelper {
             int firstNameIndex = cursor.getColumnIndex("firstName");
             int majorIndex = cursor.getColumnIndex("major");
             int imageIndex = cursor.getColumnIndex("image");
+            int descriptionIndex = cursor.getColumnIndex("description");
 
             if (idIndex != -1 && firstNameIndex != -1 && majorIndex != -1 && imageIndex != -1) {
                 user.setId(cursor.getLong(idIndex));
@@ -292,6 +305,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 user.setMajor(cursor.getString(majorIndex));
                 byte[] imageBytes = cursor.getBlob(imageIndex);
                 user.setImage(imageBytes);
+                user.setDesciption(cursor.getString(descriptionIndex));
             } else {
                 Log.e("CursorError", "Column indices not found");
             }
@@ -302,6 +316,34 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.close();
         return user;
+    }
+
+    public int getTotalScoreForUser(long userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int totalScore = -1;
+
+        Cursor cursor = db.query(
+                "quiz_answers",  // Table name
+                new String[]{"totalScore"},
+                "user_id=?",  // Selection criteria
+                new String[]{String.valueOf(userId)},
+                null, null, null
+        );
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int totalScoreIndex = cursor.getColumnIndex("totalScore");
+            if (totalScoreIndex != -1) {
+                totalScore = cursor.getInt(totalScoreIndex);
+            } else {
+                Log.e("CursorError", "TotalScore column not found");
+            }
+            cursor.close();
+        } else {
+            Log.e("CursorError", "Cursor is null or empty");
+        }
+
+        db.close();
+        return totalScore;
     }
 
 }
