@@ -74,9 +74,12 @@ public class ProfileCreationActivity extends AppCompatActivity {
 
         description=findViewById(R.id.editTxtUserDescription);
 
-        Intent intent2 = getIntent();
-        String userEmail = intent2.getStringExtra("email");
-        long userId = dbHelper.getUserIdByEmail(userEmail);
+//        Intent intent2 = getIntent();
+//        String userEmail = intent2.getStringExtra("email");
+//        Log.d("TEST BIBAS", "userEmail is " + userEmail);
+//
+//        long userId = dbHelper.getUserIdByEmail();
+
         Log.d("ProfileCreation", "Retrieved userId: " + userId);
 
         ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
