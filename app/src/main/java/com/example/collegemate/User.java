@@ -2,6 +2,8 @@ package com.example.collegemate;
 
 import java.io.Serializable;
 
+//user class used to structure user data and easier interaction with database
+//Serializable  used to pass user Object through intent
 public class User implements Serializable {
 
     private long id;
@@ -14,19 +16,11 @@ public class User implements Serializable {
 
     private String firstName;
 
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
     private String lastName;
 
     private String major;
 
-    private byte[] image;
+    private String imagePath;
 
     private String desciption;
 
@@ -35,7 +29,7 @@ public class User implements Serializable {
     }
 
 
-    public User(long id, String email, String password, int birthYear, int birthMonth, int birthDate, String firstName, String lastName, String major, byte[] image, String desciption) {
+    public User(long id, String email, String password, int birthYear, int birthMonth, int birthDate, String firstName, String lastName, String major, String imagePath, String desciption) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -45,7 +39,7 @@ public class User implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.major = major;
-        this.image = image;
+        this.imagePath = imagePath;
         this.desciption = desciption;
     }
 
@@ -65,7 +59,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(long id, String email, String password, int birthYear, int birthMonth, int birthDate, String firstName, String lastName, String major, byte[] image) {
+    public User(long id, String email, String password, int birthYear, int birthMonth, int birthDate, String firstName, String lastName, String major, String imagePath) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -75,7 +69,7 @@ public class User implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.major = major;
-        this.image = image;
+        this.imagePath = imagePath;
     }
 
     public int getBirthYear() {
@@ -134,6 +128,14 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -150,6 +152,8 @@ public class User implements Serializable {
         this.password = password;
     }
 
+
+    //used to be able to see these fields in log.d
     @Override
     public String toString() {
         return "User{" +

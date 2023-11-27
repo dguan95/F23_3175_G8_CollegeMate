@@ -100,34 +100,35 @@ public class LoginActivity extends AppCompatActivity {
 //            finish();
         }
 
+        //open an activity and waiting for result, when result received the code inside onActivityResult is executed
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
+                        //data is intent  inside result
                         Intent data = result.getData();
                         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
                         try {
+                            //receiving google account from task
                             GoogleSignInAccount googleAccount = task.getResult(ApiException.class);
                             finish();
 
                             Intent intent;
                             if (googleSignInAccount != null) {
                                 intent = new Intent(LoginActivity.this, ProfilePage.class);
-
+                                //if account exists, retrieve user info
                                 User user = dbHelper.getUser(googleSignInAccount.getEmail(), "google");
                                 intent.putExtra("user", user);
                             } else {
                                 User user = new User(googleAccount.getEmail(), "google");
-
+                                //if account does not exist add user info
                                 dbHelper.addUser(user);
 
                                 intent = new Intent(LoginActivity.this, ProfileCreationActivity.class);
                                 intent.putExtra("user", user);
                             }
-//                            userEmail = googleSignInAccount.getEmail();
-//                            Toast.makeText(LoginActivity.this, "Successfully Signed in as " + userEmail, Toast.LENGTH_SHORT).show();
 
                             startActivity(intent);
                         } catch (ApiException e) {
@@ -140,14 +141,8 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-              // Bundle bundle = new Bundle();
-               //bundle.putString("USER", userEmail);
+                //call the intent created above
                 Intent signInIntent = googleSignInClient.getSignInIntent();
-
-
-                //signInIntent.putExtras(bundle);
                 activityResultLauncher.launch(signInIntent);
 
             }

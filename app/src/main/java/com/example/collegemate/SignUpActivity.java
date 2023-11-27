@@ -48,7 +48,9 @@ public class SignUpActivity extends AppCompatActivity {
                 User user = new User(email, password);
 
                 try {
+                    //validates email based on regular expression
                     Pattern regexPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+                    //check emil based on pattern
                     Matcher matcher = regexPattern.matcher(email);
 
 

@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "CollegeMateDatabase";
-    private static final int DATABASE_VERSION = 4; //i incremented when make changes
+    private static final int DATABASE_VERSION = 5; //i incremented when make changes
 
 
     //create table in DB
@@ -27,7 +27,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "firstName TEXT, " +
             "lastName TEXT, " +
             "major TEXT, " +
-            "image BLOB," +
+            "imagePath TEXT, " +  // New column for image path
             "description TEXT);";
 
     private static final String TABLE_QUIZ_CREATE = "CREATE TABLE quiz_answers " +
@@ -142,6 +142,7 @@ public class DBHelper extends SQLiteOpenHelper {
             int fnameIndex = cursor.getColumnIndex("firstName");
             int lnameIndex = cursor.getColumnIndex("lastName");
             int descIndex = cursor.getColumnIndex("description");
+            int imageIndex = cursor.getColumnIndex("imagePath");
 
 //            int imageIndex = cursor.getColumnIndex("image");
 
@@ -164,6 +165,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 user.setBirthDate(cursor.getInt(birthDateIndex));
 //                user.setImage(cursor.getBlob(imageIndex));
                 user.setDesciption(cursor.getString(descIndex));
+                user.setImagePath(cursor.getString(imageIndex));
             }
         }
 
@@ -193,6 +195,7 @@ public class DBHelper extends SQLiteOpenHelper {
             int fnameIndex = cursor.getColumnIndex("firstName");
             int lnameIndex = cursor.getColumnIndex("lastName");
             int descIndex = cursor.getColumnIndex("description");
+            int imageIndex = cursor.getColumnIndex("imagePath");
 
 //            int imageIndex = cursor.getColumnIndex("image");
 
@@ -212,6 +215,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 user.setBirthMonth(cursor.getInt(birthMonthIndex));
                 user.setBirthDate(cursor.getInt(birthDateIndex));
 //                user.setImage(cursor.getBlob(imageIndex));
+                user.setImagePath(cursor.getString(imageIndex));
                 user.setDesciption(cursor.getString(descIndex));
             }
         }
@@ -237,6 +241,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("major", user.getMajor());
 //        values.put("image", user.getImage());
         values.put("description", user.getDesciption());
+        values.put("imagePath", user.getImagePath());
 
         // Updating row
         int rowsAffected = db.update("users", values, "email = ?", new String[]{String.valueOf(user.getEmail())});
@@ -284,14 +289,13 @@ public class DBHelper extends SQLiteOpenHelper {
             int idIndex = cursor.getColumnIndex("_id");
             int firstNameIndex = cursor.getColumnIndex("firstName");
             int majorIndex = cursor.getColumnIndex("major");
-            int imageIndex = cursor.getColumnIndex("image");
+            int imageIndex = cursor.getColumnIndex("imagePath");
 
             if (idIndex != -1 && firstNameIndex != -1 && majorIndex != -1 && imageIndex != -1) {
                 user.setId(cursor.getLong(idIndex));
                 user.setFirstName(cursor.getString(firstNameIndex));
                 user.setMajor(cursor.getString(majorIndex));
-                byte[] imageBytes = cursor.getBlob(imageIndex);
-                user.setImage(imageBytes);
+                user.setImagePath(cursor.getString(imageIndex));
             } else {
                 Log.e("CursorError", "Column indices not found");
             }

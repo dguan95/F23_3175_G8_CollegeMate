@@ -88,5 +88,6 @@
     <string name="txtBillingInfoTitle">Billing Information</string>
     <string name="txtFullNameTitle">Full Name</string>
     <string name="txtHintDesc">Tell about yourself</string>
+    <string name="txtSplit">,</string>
 
 </resources>

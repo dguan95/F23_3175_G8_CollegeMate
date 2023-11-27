@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -19,9 +20,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.ByteArrayOutputStream;
+import java.time.LocalDate;
+import java.time.Period;
 
 public class ProfilePage extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     TextView txtViewFName;
@@ -39,7 +44,10 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
     int birthYearInstance;
     int birthMonthInstance;
     int birthDateInstance;
+    Uri URI;
 
+
+    //shared preferences save state across activities
     private SharedPreferences sharedPreferences;
 
 
@@ -64,6 +72,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.profile_page);
 
+        //initialize the state
         sharedPreferences = getPreferences(Context.MODE_PRIVATE);
 
         Intent intent1 = getIntent();
@@ -89,25 +98,38 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                 String month = bundle.getString("MONTH");
                 String year = bundle.getString("YEAR");
                 String userDesc = bundle.getString("DESCRIPTION");
+                String imagePath = bundle.getString("IMAGE");
+                URI = Uri.parse(imagePath);
 
-//                byte[] image = bundle.getByteArray("IMAGE");
-//                Bitmap bitmap = BitmapFactory.decodeByteArray(image,  0, image.length);
-//
-//                imageView.setImageBitmap(bitmap);
+                int dayInt = Integer.parseInt(day);
+                int monthInt = Integer.parseInt(month);
+                int yearInt = Integer.parseInt(year);
+
+
+                LocalDate birthdate = LocalDate.of(yearInt, monthInt, dayInt);
+                LocalDate currentDate = LocalDate.now();
+                Period age = Period.between(birthdate, currentDate);
+                int ageYears = age.getYears();
+                String ageStr= Integer.toString(ageYears);
+                //Log.d("AGE", ageStr);
+
                 txtViewFName.setText(fName);
                 TxtViewLName.setText(lName);
                 TxtViewMajor.setText(major);
-                TxtViewDOB.setText(day + "-" + month + "-" + year);
+                TxtViewDOB.setText(ageStr);
+                //TxtViewDOB.setText(day + "-" + month + "-" + year);
                 TxtViewDescription.setText(userDesc);
+                imageView.setImageURI(URI);
+
+                Glide.with(this)
+                        .load(URI)
+                        .transform(new CircleCrop())
+                        .into(imageView);
 
             } else {
                 Log.d("TEST 1", "HERE");
                 if (getIntent() != null) {
                     Log.d("TEST 2", getIntent().getSerializableExtra("user") + "");
-//                String email = getIntent().getExtras().getString("userEmail");
-//                String password = getIntent().getExtras().getString("userPassword");
-//
-//                User user = dbHelper.getUser(email, password);
                     Log.d("GETTING USER", "asfsafsa");
                     User user = (User) getIntent().getSerializableExtra("user");
 
@@ -119,7 +141,28 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                         TxtViewLName.setText(user.getLastName());
                         TxtViewMajor.setText(user.getMajor());
                         TxtViewDescription.setText(user.getDesciption());
-                        TxtViewDOB.setText(user.getBirthDate() + "-" + user.getBirthMonth() + "-" + user.getBirthYear());
+                        URI = Uri.parse(user.getImagePath());
+
+
+                        Glide.with(this)
+                                .load(Uri.parse(user.getImagePath()))
+                                .transform(new CircleCrop())
+                                .into(imageView);
+
+                        int dayInt = user.getBirthDate();
+                        int monthInt = user.getBirthMonth();
+                        int yearInt = user.getBirthYear();
+
+                        LocalDate birthdate = LocalDate.of(yearInt, monthInt, dayInt);
+                        LocalDate currentDate = LocalDate.now();
+                        Period age = Period.between(birthdate, currentDate);
+                        int ageYears = age.getYears();
+                        String ageStr= Integer.toString(ageYears);
+                        //Log.d("AGE", ageStr);
+
+                        TxtViewDOB.setText(ageStr);
+
+                       // TxtViewDOB.setText(user.getBirthDate() + "-" + user.getBirthMonth() + "-" + user.getBirthYear());
                     } else {
                         if (sharedPreferences.contains("FNAME") && sharedPreferences.contains("LNAME")
                                 && sharedPreferences.contains("MAJOR") && sharedPreferences.contains("DOB")) {
@@ -160,30 +203,23 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         TxtViewMajor.setText(sharedPreferences.getString("MAJOR", "C"));
         TxtViewDOB.setText(sharedPreferences.getString("DOB", "R"));
         TxtViewDescription.setText(sharedPreferences.getString("DESCRIPTION","D"));
+        Glide.with(this)
+                .load(Uri.parse(sharedPreferences.getString("IMAGE", "I")))
+                .transform(new CircleCrop())
+                .into(imageView);
 
-//        String imageString = sharedPreferences.getString("IMAGE", null);
-//
-//        if (imageString != null) {
-//            byte[] imageByteArray = Base64.decode(imageString, Base64.DEFAULT);
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
-//            imageView.setImageBitmap(bitmap);
-//        }
     }
 
     private void saveState() {
+        //editor object to save values inside state
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("FNAME", txtViewFName.getText().toString());
         editor.putString("LNAME", TxtViewLName.getText().toString());
         editor.putString("MAJOR", TxtViewMajor.getText().toString());
         editor.putString("DOB", TxtViewDOB.getText().toString());
         editor.putString("DESCRIPTION",TxtViewDescription.getText().toString());
+        editor.putString("IMAGE", URI.toString());
 
-//        BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
-//        Bitmap bitmap = drawable.getBitmap();
-//        byte[] imageByteArray = convertBitmapToByteArray(bitmap);
-//        String imageString = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
-//
-//        editor.putString("IMAGE", imageString);
         editor.apply();
     }
 
@@ -225,11 +261,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         super.onPointerCaptureChanged(hasCapture);
     }
 
-    public static byte[] convertBitmapToByteArray(Bitmap bitmap) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
-    }
+
 
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putString("FNAME", txtViewFName.getText().toString());
@@ -237,6 +269,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
         savedInstanceState.putString("MAJOR", TxtViewMajor.getText().toString());
         savedInstanceState.putString("DOB", TxtViewDOB.getText().toString());
         savedInstanceState.putString("DESCRIPTION", TxtViewDescription.getText().toString());
+        savedInstanceState.putString("IMAGE", URI.toString());
 
         super.onSaveInstanceState(savedInstanceState);
     }

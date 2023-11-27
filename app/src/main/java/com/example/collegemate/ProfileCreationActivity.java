@@ -58,6 +58,7 @@ public class ProfileCreationActivity extends AppCompatActivity {
 
     ImageView imgView;
     FloatingActionButton btnGallery;
+    String URI;
     List<String> months = new ArrayList<>(Arrays.asList("Month","January","February","March","April","May","June","July", "August","September", "October", "November","December"));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,14 +89,14 @@ public class ProfileCreationActivity extends AppCompatActivity {
                     if (uri != null) {
                         Log.d("PhotoPicker", "Selected URI: " + uri);
                         imgView.setImageURI(uri);
+                        //glide with used to upload picture to imgView
                         Glide.with(this)
                                 .load(uri)
                                 .transform(new CircleCrop())
                                 .into(imgView);
-//                        Glide.with(this)
-//                                .load(uri)
-//                                .transform(new RoundedCorners(imgView.getWidth() / 2))
-//                                .into(imgView);
+
+                        URI = uri.toString();
+
                     } else {
                         Log.d("PhotoPicker", "No media selected");
                     }
@@ -141,6 +142,7 @@ public class ProfileCreationActivity extends AppCompatActivity {
                     Toast.makeText(this, "Enter Date of Birth", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 if(year.getText().toString().isEmpty())
                 {
                     Toast.makeText(this, "Enter year", Toast.LENGTH_SHORT).show();
@@ -167,9 +169,9 @@ public class ProfileCreationActivity extends AppCompatActivity {
                 {
                     Toast.makeText(this, "Put some description", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (description.getText().toString().length()>100)
+                } else if (description.getText().toString().length()>200)
                 {
-                    Toast.makeText(this, "Put some description", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Description must contain up to 200 characters", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -182,12 +184,8 @@ public class ProfileCreationActivity extends AppCompatActivity {
                     String yearString = year.getText().toString();
                     String monthString = "";
                     String descriptionStr = description.getText().toString();
+                    String imagePath = URI;
 
-
-//                    BitmapDrawable drawable = (BitmapDrawable) imgView.getDrawable();
-//                    Bitmap bitmap = drawable.getBitmap();
-
-//                    byte[] imageByteArray = convertBitmapToByteArray(bitmap);
 
                     for (int i=0; i<months.size();i++)
                     {
@@ -206,6 +204,7 @@ public class ProfileCreationActivity extends AppCompatActivity {
                     user.setBirthYear(Integer.parseInt(yearString));
                     user.setMajor(majorString);
                     user.setDesciption(descriptionStr);
+                    user.setImagePath(imagePath);
 
                     try {
                         dbHelper.updateUser(user);
@@ -222,14 +221,12 @@ public class ProfileCreationActivity extends AppCompatActivity {
                     bundle.putString("MONTH", monthString);
                     bundle.putString("YEAR",yearString);
                     bundle.putString("DESCRIPTION", descriptionStr);
+                    bundle.putString("IMAGE", imagePath);
 
                     Intent intent = new Intent(ProfileCreationActivity.this, ProfilePage.class);
                     intent.putExtras(bundle);
                     intent.putExtra("userId", userId);
                     startActivity(intent);
-
-
-
 
                 }
                 catch(Exception ex)
@@ -240,14 +237,5 @@ public class ProfileCreationActivity extends AppCompatActivity {
                 }
         });
     }
-
-
-
-    public static byte[] convertBitmapToByteArray(Bitmap bitmap) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
-    }
-
 
 }

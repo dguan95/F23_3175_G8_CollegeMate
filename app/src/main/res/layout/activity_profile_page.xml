@@ -18,26 +18,26 @@
 
     <ImageView
         android:id="@+id/imgViewProfilIcon2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/custom_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/person" />
+        app:srcCompat="@drawable/person"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/txtViewFName"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="24dp"
         android:text="TextView"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgViewProfilIcon2" />
 
@@ -45,15 +45,14 @@
         android:id="@+id/txtViewLName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:text="TextView"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewFName" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/txtViewFName"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewProfilIcon2" />
 
     <TextView
         android:id="@+id/txtViewMajor"
@@ -73,15 +72,15 @@
         android:id="@+id/txtViewBirth"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:text="TextView"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewMajor" />
+        app:layout_constraintStart_toEndOf="@+id/txtViewSplit"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewProfilIcon2" />
 
     <TextView
         android:id="@+id/txtViewDescription"
@@ -95,7 +94,18 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewBirth" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewMajor" />
+
+    <TextView
+        android:id="@+id/txtViewSplit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/txtSplit"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/txtViewLName"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewProfilIcon2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
