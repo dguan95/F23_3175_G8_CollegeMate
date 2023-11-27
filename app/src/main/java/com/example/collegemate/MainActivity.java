@@ -43,10 +43,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (menuItemId == R.id.home_page){
             return true;
         } else if (menuItemId == R.id.chat_page){
-            Intent quizIntent = new Intent(MainActivity.this, MatchActivity.class);
+            DBHelper dbHelper = new DBHelper(MainActivity.this);
             long userId = getIntent().getLongExtra("userId", -1);
-            quizIntent.putExtra("userId", userId);
-            startActivity(quizIntent);
+            int totalScore = dbHelper.getTotalScoreForUser(userId);
+
+            if (totalScore > 8) {
+                // Navigate to MatchActivity
+                Intent matchIntent = new Intent(MainActivity.this, MatchActivity.class);
+                matchIntent.putExtra("userId", userId);
+                startActivity(matchIntent);
+            } else {
+                // Navigate to QuizActivity
+                Intent quizIntent = new Intent(MainActivity.this, QuizActivity.class);
+                quizIntent.putExtra("userId", userId);
+                startActivity(quizIntent);
+            }
             return true;
         } else if (menuItemId == R.id.search_page){
             startActivity(new Intent(MainActivity.this, SearchActivity.class));

@@ -241,10 +241,21 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
             startActivity(quizIntent);
             return true;
         } else if (menuItemId == R.id.chat_page){
-            Intent quizIntent = new Intent(ProfilePage.this,  MatchActivity.class);
+            DBHelper dbHelper = new DBHelper(ProfilePage.this);
             long userId = getIntent().getLongExtra("userId", -1);
-            quizIntent.putExtra("userId", userId);
-            startActivity(quizIntent);
+            int totalScore = dbHelper.getTotalScoreForUser(userId);
+
+            if (totalScore > 8) {
+                // Navigate to MatchActivity
+                Intent matchIntent = new Intent(ProfilePage.this, MatchActivity.class);
+                matchIntent.putExtra("userId", userId);
+                startActivity(matchIntent);
+            } else {
+                // Navigate to QuizActivity
+                Intent quizIntent = new Intent(ProfilePage.this, QuizActivity.class);
+                quizIntent.putExtra("userId", userId);
+                startActivity(quizIntent);
+            }
             return true;
         } else if (menuItemId == R.id.search_page){
             startActivity(new Intent(ProfilePage.this, SearchActivity.class));
