@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -31,6 +33,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,6 +63,7 @@ public class ProfileCreationActivity extends AppCompatActivity {
     FloatingActionButton btnGallery;
     String URI;
     List<String> months = new ArrayList<>(Arrays.asList("Month","January","February","March","April","May","June","July", "August","September", "October", "November","December"));
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +78,8 @@ public class ProfileCreationActivity extends AppCompatActivity {
         btnGallery = findViewById(R.id.btnOpenGallery);
 
         description=findViewById(R.id.editTxtUserDescription);
+        URI = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.person).toString();
 
-//        Intent intent2 = getIntent();
-//        String userEmail = intent2.getStringExtra("email");
-//        Log.d("TEST BIBAS", "userEmail is " + userEmail);
-//
-//        long userId = dbHelper.getUserIdByEmail();
 
         Log.d("ProfileCreation", "Retrieved userId: " + userId);
 
@@ -116,13 +116,7 @@ public class ProfileCreationActivity extends AppCompatActivity {
 
         major = findViewById(R.id.editTxtMajor);
 
-        try {
-            yearInt = Integer.parseInt(year.getText().toString());
-        } catch(Exception e)
-        {
-            e.printStackTrace();
-            Log.d("Parse error",e.getMessage());
-        }
+
 
 
         btnCreateProfile = findViewById(R.id.btnCreateProfile);
@@ -137,28 +131,70 @@ public class ProfileCreationActivity extends AppCompatActivity {
                     Toast.makeText(this, "Enter Your Last Name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(dOB.getText().toString().isEmpty())
-                {
-                    Toast.makeText(this, "Enter Date of Birth", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                 if(dOB.getText().toString().isEmpty())
+                 {
+                       Toast.makeText(this, "Enter Date of Birth", Toast.LENGTH_SHORT).show();
+                      return;
+                 } else
+                 {
+                     try
+                     {
+
+                         int dayInt=Integer.parseInt(dOB.getText().toString());
+                         if (dayInt%1 !=0)
+                         {
+                             Toast.makeText(this, "Day is invalid!", Toast.LENGTH_SHORT).show();
+
+                             return;
+                         } else if(dayInt<1 || dayInt >31)
+                         {
+                             Toast.makeText(this, "Day is invalid", Toast.LENGTH_SHORT).show();
+
+                             return;
+                         }
+
+                     }
+                     catch(Exception ex)
+                     {
+                         ex.printStackTrace();
+                     }
+                 }
+
+
 
                 if(year.getText().toString().isEmpty())
                 {
-                    Toast.makeText(this, "Enter year", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Enter a year", Toast.LENGTH_SHORT).show();
 
                     return;
-                }else if (yearInt%1 !=0)
-                {
-                    Toast.makeText(this, "Year is invalid!", Toast.LENGTH_SHORT).show();
+                }else {
+                    try {
+                        LocalDate currentDate = LocalDate.now();
+                        int currYear = currentDate.getYear();
+                        yearInt = Integer.parseInt(year.getText().toString());
+                        if (yearInt%1 !=0)
+                        {
+                            Toast.makeText(this, "Year is invalid!", Toast.LENGTH_SHORT).show();
 
-                    return;
-                }// else if(yearInt<1920 || yearInt >2023)
-                //{
-                   // Toast.makeText(this, "Year is invalid", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else if(yearInt<1920 || yearInt >currYear)
+                        {
+                            Toast.makeText(this, "Year is invalid", Toast.LENGTH_SHORT).show();
 
-                   // return;
-               // }
+                            return;
+                        }
+                    } catch(Exception e)
+                    {
+                        e.printStackTrace();
+                        Log.d("Parse error",e.getMessage());
+                    }
+
+
+
+                }
+
+
+
                 if(month.getSelectedItemPosition()==0)
                 {
                     Toast.makeText(this, "Choose month", Toast.LENGTH_SHORT).show();

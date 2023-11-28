@@ -1,6 +1,7 @@
 package com.example.collegemate;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -52,6 +54,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
 
 
     BottomNavigationView bottomNavigationView;
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +102,17 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                 String year = bundle.getString("YEAR");
                 String userDesc = bundle.getString("DESCRIPTION");
                 String imagePath = bundle.getString("IMAGE");
-                URI = Uri.parse(imagePath);
+                if(imagePath!=null)
+                {
+                    URI = Uri.parse(imagePath);
+                    imageView.setImageURI(URI);
+
+                    Glide.with(this)
+                            .load(URI)
+                            .transform(new CircleCrop())
+                            .into(imageView);
+                }
+
 
                 int dayInt = Integer.parseInt(day);
                 int monthInt = Integer.parseInt(month);
@@ -119,12 +132,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                 TxtViewDOB.setText(ageStr);
                 //TxtViewDOB.setText(day + "-" + month + "-" + year);
                 TxtViewDescription.setText(userDesc);
-                imageView.setImageURI(URI);
 
-                Glide.with(this)
-                        .load(URI)
-                        .transform(new CircleCrop())
-                        .into(imageView);
 
             } else {
                 Log.d("TEST 1", "HERE");
@@ -141,13 +149,18 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                         TxtViewLName.setText(user.getLastName());
                         TxtViewMajor.setText(user.getMajor());
                         TxtViewDescription.setText(user.getDesciption());
-                        URI = Uri.parse(user.getImagePath());
+
+                        if(user.getImagePath()!=null)
+                        {
+                            URI = Uri.parse(user.getImagePath());
 
 
-                        Glide.with(this)
-                                .load(Uri.parse(user.getImagePath()))
-                                .transform(new CircleCrop())
-                                .into(imageView);
+                            Glide.with(this)
+                                    .load(Uri.parse(user.getImagePath()))
+                                    .transform(new CircleCrop())
+                                    .into(imageView);
+                        }
+
 
                         int dayInt = user.getBirthDate();
                         int monthInt = user.getBirthMonth();
