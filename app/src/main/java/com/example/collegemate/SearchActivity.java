@@ -32,11 +32,10 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
         LoadDataSearchList();
 
         ListView listViewSearch = findViewById(R.id.listViewSearch);
-        SearchAdapter searchAdap = new SearchAdapter(SearchList);
+        SearchAdapter2 searchAdap = new SearchAdapter2(SearchList);
         listViewSearch.setAdapter(searchAdap);
 
         listViewSearch.setOnItemClickListener((AdapterView<?> adapterView, View view, int i, long l)->{
-            Toast.makeText(this, "Clicked on " + SearchList.get(i).getSearchItem(), Toast.LENGTH_SHORT).show();
 
             int searchItemIndex = listViewSearch.getSelectedItemPosition();
 
