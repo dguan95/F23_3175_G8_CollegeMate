@@ -20,7 +20,7 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     List<String> SearchItems = new ArrayList<>(Arrays.asList("Find Roommates", "Housing and Tips",
-            "Events and Activities", "Resource Sharing"));
+            "Find Accommodation", "Resource Sharing"));
 
     List<Search> SearchList = new ArrayList<>();
 
@@ -37,23 +37,15 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
 
         listViewSearch.setOnItemClickListener((AdapterView<?> adapterView, View view, int i, long l)->{
 
-            int searchItemIndex = listViewSearch.getSelectedItemPosition();
-
-            if(searchItemIndex == 0){
+            if(i == 0){
                 startActivity(new Intent(SearchActivity.this, QuizActivity.class));
-            }
-            if(searchItemIndex == 1){
-                startActivity(new Intent(SearchActivity.this, FindAccommodationActivity.class));
-            }
-            if(searchItemIndex == 2){
+            } else if(i == 1){
                 startActivity(new Intent(SearchActivity.this, HousingTipsActivity.class));
+            } else if(i == 2){
+                startActivity(new Intent(SearchActivity.this, FindAccommodationActivity.class));
+            } else {
+                startActivity(new Intent(SearchActivity.this, ResourceSharingActivity.class));
             }
-            /*if(searchItemIndex == 3){ --for 'Events and activities' Activity
-                startActivity(new Intent(SearchActivity.this, QuizActivity.class));
-            }
-            if(searchItemIndex == 3){ -- for Resource sharing Activity
-                startActivity(new Intent(SearchActivity.this, QuizActivity.class));
-            }*/
 
         });
 

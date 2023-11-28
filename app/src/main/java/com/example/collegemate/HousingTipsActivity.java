@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HousingTipsActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class HousingTipsActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     @Override
@@ -17,33 +17,6 @@ public class HousingTipsActivity extends AppCompatActivity implements BottomNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_housing_tips);
 
-        bottomNavigationView=findViewById(R.id.BottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(R.id.search_page);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int menuItemId = item.getItemId();
-
-        if (menuItemId == R.id.home_page){
-            return true;
-        } else if (menuItemId == R.id.chat_page){
-            startActivity(new Intent(HousingTipsActivity.this, QuizActivity.class));
-            return true;
-        } else if (menuItemId == R.id.search_page){
-            startActivity(new Intent(HousingTipsActivity.this, SearchActivity.class));
-            return true;
-        } else if (menuItemId == R.id.profile_page){
-            startActivity(new Intent(HousingTipsActivity.this, ProfilePage.class));
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-        super.onPointerCaptureChanged(hasCapture);
-    }
 }
