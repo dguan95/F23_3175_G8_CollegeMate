@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,10 +19,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindAccommodationActivity extends AppCompatActivity {
+public class FindAccommodationActivity extends AppCompatActivity implements FloorPlansRecyclerViewAdapter.OnItemClickListener {
 
     List<FloorPlans> FloorPlanList = new ArrayList<>();
     Button btnBack;
+    ImageView imgViewFloorPlan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +41,13 @@ public class FindAccommodationActivity extends AppCompatActivity {
             }
         });
         //need to set this with onClickListener
-        ImageView imgViewFloorPlans = findViewById(R.id.imgViewAccommodation);
+        imgViewFloorPlan = findViewById(R.id.imgViewAccommodation);
 
-        FloorPlansRecyclerViewAdapter floorPlanAdapter = new FloorPlansRecyclerViewAdapter(FloorPlanList);
+        //FloorPlansRecyclerViewAdapter floorPlanAdapter = new FloorPlansRecyclerViewAdapter(FloorPlanList);
+        FloorPlansRecyclerViewAdapter floorPlanAdapter = new FloorPlansRecyclerViewAdapter(FloorPlanList, this);
+
         GridLayoutManager gridManager = new GridLayoutManager(this,3);
+
         recyclerViewFloorPlans.setAdapter(floorPlanAdapter);
         recyclerViewFloorPlans.setLayoutManager(gridManager);
 
@@ -55,4 +60,10 @@ public class FindAccommodationActivity extends AppCompatActivity {
         FloorPlanList.add(new FloorPlans(3, "Suite 3-2", R.drawable.threebedroomplan));
     }
 
+    @Override
+    public void onItemClick(int i) {
+        if(i != -1) {
+            imgViewFloorPlan.setImageResource(FloorPlanList.get(i).getFloorPlanPic());
+        }
+    }
 }

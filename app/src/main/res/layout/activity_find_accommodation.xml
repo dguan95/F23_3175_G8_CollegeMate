@@ -121,4 +121,14 @@
         app:layout_constraintEnd_toStartOf="@+id/txtViewFindAccommTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtViewSelectionDetail"
+        android:layout_width="200dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/imgViewAccommodation"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewAccommodationDetails" />
 </androidx.constraintlayout.widget.ConstraintLayout>
