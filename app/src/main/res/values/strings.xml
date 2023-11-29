@@ -62,6 +62,7 @@
     <string name="txtCurrentAccomDetails">Shared bedroom $1.600 due November</string>
     <string name="btnPayRent">Pay Housing</string>
     <string name="btnModifyHousing">Modify Housing</string>
+    <string name="btnMoreDetails">More Details</string>
     <string name="btnText">btn gallery</string>
     <string name="tedLink"><a href="https://www.ted.com/">Boost your creativity with  TED Talks</a></string>
     <string name="courseEraLink"><a href="https://www.coursera.org/">Revise and review your own paper</a>
