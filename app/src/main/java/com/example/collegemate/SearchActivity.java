@@ -68,7 +68,7 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
         int menuItemId = item.getItemId();
         long userId;
         if (menuItemId == R.id.home_page){
-            Intent quizIntent = new Intent(SearchActivity.this, MatchActivity.class);
+            Intent quizIntent = new Intent(SearchActivity.this, MainActivity.class);
             userId = getIntent().getLongExtra("userId", -1);
             quizIntent.putExtra("userId", userId);
             startActivity(quizIntent);
