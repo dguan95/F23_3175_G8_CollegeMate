@@ -4,19 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background5"
+    android:background="@drawable/background4"
     tools:context=".MatchActivity">
 
     <TextView
         android:id="@+id/textViewTittleMatchActivity"
+        style="@android:style/Widget.Holo.Light.TextView.SpinnerItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
+        android:background="?android:attr/textSelectHandleLeft"
         android:text="@string/txtViewTittleMatch"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="40sp"
-        android:textStyle="normal|bold"
+        android:textStyle="normal|bold|italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -100,7 +102,7 @@
         android:id="@+id/textViewYourPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="28dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTittleMatchActivity" />

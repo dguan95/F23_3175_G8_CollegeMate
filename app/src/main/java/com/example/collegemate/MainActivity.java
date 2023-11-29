@@ -39,12 +39,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int menuItemId = item.getItemId();
+        long userId;
 
         if (menuItemId == R.id.home_page){
             return true;
         } else if (menuItemId == R.id.chat_page){
             DBHelper dbHelper = new DBHelper(MainActivity.this);
-            long userId = getIntent().getLongExtra("userId", -1);
+            userId = getIntent().getLongExtra("userId", -1);
             int totalScore = dbHelper.getTotalScoreForUser(userId);
 
             if (totalScore > 8) {
@@ -60,11 +61,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             }
             return true;
         } else if (menuItemId == R.id.search_page){
-            startActivity(new Intent(MainActivity.this, SearchActivity.class));
+            Intent quizIntent = new Intent(MainActivity.this, SearchActivity.class);
+            userId = getIntent().getLongExtra("userId", -1);
+            quizIntent.putExtra("userId", userId);
+            startActivity(quizIntent);
             return true;
         } else if (menuItemId == R.id.profile_page){
             Intent quizIntent = new Intent(MainActivity.this, ProfilePage.class);
-            long userId = getIntent().getLongExtra("userId", -1);
+            userId = getIntent().getLongExtra("userId", -1);
             quizIntent.putExtra("userId", userId);
             startActivity(quizIntent);
             return true;

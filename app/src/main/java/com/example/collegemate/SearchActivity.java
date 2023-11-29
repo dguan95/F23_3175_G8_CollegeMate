@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -53,24 +54,50 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.search_page);
 
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("userId")) {
+            long userId = intent.getLongExtra("userId", -1);
+            Log.d("SearchActivity", "Retrieved userId: " + userId);
+        }
+
 
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int menuItemId = item.getItemId();
-
+        long userId;
         if (menuItemId == R.id.home_page){
-            startActivity(new Intent(SearchActivity.this, MainActivity.class));
+            Intent quizIntent = new Intent(SearchActivity.this, MatchActivity.class);
+            userId = getIntent().getLongExtra("userId", -1);
+            quizIntent.putExtra("userId", userId);
+            startActivity(quizIntent);
             return true;
         } else if (menuItemId == R.id.chat_page){
-            startActivity(new Intent(SearchActivity.this, ChatActivity.class));
+            DBHelper dbHelper = new DBHelper(SearchActivity.this);
+            userId = getIntent().getLongExtra("userId", -1);
+            int totalScore = dbHelper.getTotalScoreForUser(userId);
+
+            if (totalScore > 8) {
+                // Navigate to MatchActivity
+                Intent matchIntent = new Intent(SearchActivity.this, MatchActivity.class);
+                matchIntent.putExtra("userId", userId);
+                startActivity(matchIntent);
+            } else {
+                // Navigate to QuizActivity
+                Intent quizIntent = new Intent(SearchActivity.this, QuizActivity.class);
+                quizIntent.putExtra("userId", userId);
+                startActivity(quizIntent);
+            }
             return true;
         } else if (menuItemId == R.id.search_page){
 
             return true;
         } else if (menuItemId == R.id.profile_page){
-            startActivity(new Intent(SearchActivity.this, ProfileActivity.class));
+            Intent quizIntent = new Intent(SearchActivity.this, ProfilePage.class);
+            userId = getIntent().getLongExtra("userId", -1);
+            quizIntent.putExtra("userId", userId);
+            startActivity(quizIntent);
             return true;
         }
         return false;

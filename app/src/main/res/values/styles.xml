@@ -5,6 +5,9 @@
         <item name="android:background">@drawable/custom_btn</item>
 
     </style>
+    <style name="RoundedSquare">
+        <item name="cornerSize">10%</item>
+    </style>
 
 
 </resources>

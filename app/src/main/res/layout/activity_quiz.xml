@@ -9,22 +9,27 @@
 
     <TextView
         android:id="@+id/textViewTittleQuiz"
+        style="@android:style/Widget.TextView.PopupMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:background="?android:attr/fastScrollPreviewBackgroundLeft"
         android:text="@string/txtViewTittleQuiz"
-        android:textSize="20sp"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewQuestion"
+        style="@android:style/Widget.TextView.PopupMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="32dp"
-        android:textSize="16sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTittleQuiz" />
 
@@ -34,19 +39,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="32dp"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewQuestion" />
 
     <ImageView
         android:id="@+id/imageViewQuestion"
+        style="@style/RoundedSquare"
         android:layout_width="350dp"
         android:layout_height="250dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewQuestionContent"
-        app:srcCompat="@drawable/q1" />
+        app:srcCompat="@drawable/q1"
+        app:shapeAppearanceOverlay="@style/RoundedSquare"
+        app:strokeColor="#00BCD4"
+        app:strokeWidth="5dp"/>
 
 
     <RadioGroup

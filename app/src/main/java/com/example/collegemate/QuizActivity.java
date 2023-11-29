@@ -37,7 +37,7 @@ public class QuizActivity extends AppCompatActivity {
         RadioButton radioButtonC = findViewById(R.id.radioButtonC);
 
         txtViewQuestion.setText("Question 1");
-        txtViewQuestionContent.setText("It is Friday night and your friend drops by with your favorite movie. Your roommate has already left to spend the weekend with family. After a few too many drinks, your friend gets a little drunk and is no condition to drive home safely, so you suggest that she/he stay for the night. Where do you let him/her crash?");
+        txtViewQuestionContent.setText("It is Friday night and your friend drops by with your favorite movie. Your roommate has already left to spend the weekend with family. Where do you let him/her crash?");
         radioButtonA.setText("In your roommate's bed");
         radioButtonB.setText("In your bed");
         radioButtonC.setText("On the couch");
