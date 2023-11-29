@@ -92,5 +92,6 @@
     <string name="txtSplit">,</string>
     <string name="txtHousingTips2">Housing Tips</string>
     <string name="btnBackButton"> Back </string>
+    <string name="txtFloorPlanInd">FloorPlanInd</string>
 
 </resources>
