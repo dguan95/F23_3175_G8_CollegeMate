@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background5"
+    android:background="@drawable/background4"
     tools:context=".MainActivity">
 
     <TextView
@@ -12,48 +12,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:text="@string/txtMainPageEvents"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imgViewMainPageEvents" />
 
     <ImageView
         android:id="@+id/imgViewMainPageEvents"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="410dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/ImgMainPageSocial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewMainPage"
-        app:srcCompat="@drawable/socialevent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/library" />
 
     <TextView
         android:id="@+id/txtViewAvailableHousing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="90dp"
         android:text="@string/txtMainPageAvailableHousing"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewMainPageEvents" />
-
-    <ImageView
-        android:id="@+id/imgViewMainPageHousing"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:contentDescription="@string/ImgAvHousing"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewAvailableHousing"
-        app:srcCompat="@drawable/housing" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewMainPage" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/BottomNavigationView"
@@ -63,6 +48,77 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu"/>
+        app:menu="@menu/bottom_nav_menu">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <TextView
+        android:id="@+id/textViewNameUser"
+        style="@android:style/Widget.Material.Light.TextView.SpinnerItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="75dp"
+        android:text="TextView"
+        android:textColor="#FFFCFC"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imgViewMainPageEvents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgViewMainPageEvents" />
+
+    <ImageView
+        android:id="@+id/imageViewHouse1"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:contentDescription="@string/ImgMainPageSocial"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewAvailableHousing"
+        app:srcCompat="@drawable/beedrom2" />
+
+    <ImageView
+        android:id="@+id/imageViewHouse2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/ImgMainPageSocial"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewHouse1"
+        app:srcCompat="@drawable/beedrom1" />
+
+    <ImageView
+        android:id="@+id/imageViewHouse3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/ImgMainPageSocial"
+        app:layout_constraintStart_toEndOf="@+id/imageViewHouse2"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewHouse4"
+        app:srcCompat="@drawable/friends" />
+
+    <ImageView
+        android:id="@+id/imageViewHouse4"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/ImgMainPageSocial"
+        app:layout_constraintStart_toEndOf="@+id/imageViewHouse1"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewAvailableHousing"
+        app:srcCompat="@drawable/beedrom3" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerViewTextMain"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtViewAvailableHousing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewMainPage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
