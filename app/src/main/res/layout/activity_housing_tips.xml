@@ -10,10 +10,22 @@
         android:id="@+id/txtViewHousingTips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
         android:text="@string/txtViewHousingTips"
         android:textSize="34sp"
+        app:layout_constraintStart_toEndOf="@+id/btnBack2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnBack2"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/btnBackButton"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toStartOf="@+id/txtViewFindAccommTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

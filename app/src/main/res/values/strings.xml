@@ -91,5 +91,6 @@
     <string name="txtHintDesc">Tell about yourself</string>
     <string name="txtSplit">,</string>
     <string name="txtHousingTips2">Housing Tips</string>
+    <string name="btnBackButton"> Back </string>
 
 </resources>
