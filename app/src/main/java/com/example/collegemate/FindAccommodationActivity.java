@@ -42,6 +42,7 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
         RecyclerView recyclerViewFloorPlans = findViewById(R.id.recyclerViewFloorPlans);
         btnBack = findViewById(R.id.btnBack);
         btnBack.setBackgroundColor(Color.BLACK);
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,15 +54,10 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
 
         if(SelIndex != -1){
             imgViewFloorPlan.setImageResource(FloorPlanList.get(SelIndex).getFloorPlanPic());
-            //txtViewSelectionDetail.setText(FloorPlanList.get(SelIndex).toString());
-            //txtViewSelectionDetail.setText("hello testing");
+            txtViewSelectionDetail.setText(FloorPlanList.get(SelIndex).getFloorPlanDetails());
         } else {
             imgViewFloorPlan.setImageResource(0);
-            /*if(SelIndex == -1){
-                txtViewSelectionDetail.setText("");
-            } else {
-                txtViewSelectionDetail.setText("hello testing");
-            }*/
+
         }
 
         //FloorPlansRecyclerViewAdapter floorPlanAdapter = new FloorPlansRecyclerViewAdapter(FloorPlanList);
@@ -76,15 +72,16 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
     }
 
     private void AddFloorPlans() {
-        FloorPlanList.add(new FloorPlans(1, "Studio", R.drawable.studiofloorplan));
-        FloorPlanList.add(new FloorPlans(2, "Suite 2-2 ", R.drawable.sharedfloorplan));
-        FloorPlanList.add(new FloorPlans(3, "Suite 3-2", R.drawable.threebedroomplan));
+        FloorPlanList.add(new FloorPlans(1, "Studio", R.drawable.studiofloorplan, "Single Main Room plus Bathroom\nINCLUDED:\nKitchen area\nSmart TV\nFull size fridge\nMicrowave\nStove"));
+        FloorPlanList.add(new FloorPlans(2, "Suite 2-2 ", R.drawable.sharedfloorplan, "2 Bedrooms 2 Bathrooms\nINCLUDED:\nCommon area with kitchen\nSmart TV\nFull size fridge\nMicrowave\nStove"));
+        FloorPlanList.add(new FloorPlans(3, "Suite 3-2", R.drawable.threebedroomplan, "3 Bedrooms 2 Bathrooms\nINCLUDED:\nCommon area with kitchen\nSmart TV\nFull size fridge\nMicrowave\nStove"));
     }
 
     @Override
     public void onItemClick(int i) {
         if(i != -1) {
             imgViewFloorPlan.setImageResource(FloorPlanList.get(i).getFloorPlanPic());
+            txtViewSelectionDetail.setText(FloorPlanList.get(i).getFloorPlanDetails());
         }
     }
 
