@@ -57,10 +57,10 @@
     <string name="txtFindAccom">Find Accommodation</string>
     <string name="txtHousingAvail">Housing Availability</string>
     <string name="txtAccommodationDetails">Details</string>
-    <string name="btnReserveOrBook">Reserve or Book to View</string>
+    <string name="btnReserveOrBook">Reserve Accommodation</string>
     <string name="txtCurrentAccomm">Your Current Accommodation Details</string>
     <string name="txtCurrentAccomDetails">Shared bedroom $1.600 due November</string>
-    <string name="btnPayRent">Pay Housing</string>
+    <string name="btnPayRent">Proceed to Payment</string>
     <string name="btnModifyHousing">Modify Housing</string>
     <string name="btnMoreDetails">More Details</string>
     <string name="btnText">btn gallery</string>

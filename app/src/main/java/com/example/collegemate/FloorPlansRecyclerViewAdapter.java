@@ -19,6 +19,14 @@ public class FloorPlansRecyclerViewAdapter extends RecyclerView.Adapter<FloorPla
     int SelectedInd;
     OnItemClickListener onItemClickListener;
 
+    public int getSelectedInd() {
+        return SelectedInd;
+    }
+
+    public void setSelectedInd(int selectedInd) {
+        SelectedInd = selectedInd;
+    }
+
     public FloorPlansRecyclerViewAdapter(List<FloorPlans> adapterFloorPlans, OnItemClickListener onItemClickListener) {
         AdapterFloorPlans = adapterFloorPlans;
         this.onItemClickListener = onItemClickListener;

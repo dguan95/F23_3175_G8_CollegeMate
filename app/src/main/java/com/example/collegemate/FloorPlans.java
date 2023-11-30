@@ -6,6 +6,16 @@ public class FloorPlans {
     private int FloorPlanPic;
     private String FloorPlanDetails;
 
+    private int FloorPlanPrice;
+
+    public int getFloorPlanPrice() {
+        return FloorPlanPrice;
+    }
+
+    public void setFloorPlanPrice(int floorPlanPrice) {
+        FloorPlanPrice = floorPlanPrice;
+    }
+
     public String getFloorPlanDetails() {
         return FloorPlanDetails;
     }
@@ -49,5 +59,13 @@ public class FloorPlans {
         FloorPlanName = floorPlanName;
         FloorPlanPic = floorPlanPic;
         FloorPlanDetails = floorPlanDetails;
+    }
+
+    public FloorPlans(int floorPlanId, String floorPlanName, int floorPlanPic, String floorPlanDetails, int floorPlanPrice) {
+        FloorPlanId = floorPlanId;
+        FloorPlanName = floorPlanName;
+        FloorPlanPic = floorPlanPic;
+        FloorPlanDetails = floorPlanDetails;
+        FloorPlanPrice = floorPlanPrice;
     }
 }
