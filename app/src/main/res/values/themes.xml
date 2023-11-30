@@ -7,8 +7,8 @@
         <item name="colorPrimaryDark">@color/brownRed</item>
         <item name="colorAccent">@color/brownRed</item>
         <item name="android:windowBackground">@color/fallback</item>
-        <item name="android:actionMenuTextColor">@color/brownRed</item>
-        <item name="android:textColorPrimary">@color/brownRed</item>
+
+
 
     </style>
 

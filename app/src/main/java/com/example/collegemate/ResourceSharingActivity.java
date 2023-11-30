@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -44,6 +47,14 @@ public class ResourceSharingActivity extends AppCompatActivity implements Bottom
         TextView studyfyLink = findViewById(R.id.txtViewStudyfy);
         studyfyLink.setMovementMethod(LinkMovementMethod.getInstance());
 
+        Button btnBack = findViewById(R.id.btnBackRes);
+        btnBack.setBackgroundColor(Color.BLACK);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
     }
 
