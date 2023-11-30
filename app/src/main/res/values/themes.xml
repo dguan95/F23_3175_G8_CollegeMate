@@ -3,9 +3,13 @@
     <style name="Base.Theme.CollegeMate" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimary">@color/design_default_color_primary</item>
-        <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
-        <item name="colorAccent">@color/design_default_color_surface</item>
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/brownRed</item>
+        <item name="colorAccent">@color/brownRed</item>
+        <item name="android:windowBackground">@color/fallback</item>
+
+
+
     </style>
 
     <style name="Theme.CollegeMate" parent="Base.Theme.CollegeMate" />

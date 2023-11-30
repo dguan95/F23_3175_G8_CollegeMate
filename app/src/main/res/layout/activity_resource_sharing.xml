@@ -9,13 +9,14 @@
     <TextView
         android:id="@+id/txtViewUsefuWebSitesTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="32dp"
+        android:gravity="center"
         android:text="@string/txtUsefulWeb"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textColor="@color/brown"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnBackRes"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -27,8 +28,8 @@
         android:fontFamily="sans-serif"
         android:gravity="center|left"
         android:text="@string/tedLink"
-        android:textColor="@color/black"
-        android:textColorLink="@color/black"
+        android:textColor="@color/brown"
+        android:textColorLink="@color/brown"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@id/imgViewTed"
         app:layout_constraintHorizontal_bias="0.0"
@@ -52,8 +53,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center|left"
-        android:textColorLink="@color/black"
         android:text="@string/studyfyLink"
+        android:textColorLink="@color/brown"
         app:layout_constraintEnd_toStartOf="@+id/imgViewStudyfy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewTedLink" />
@@ -75,8 +76,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center|left"
-        android:textColorLink="@color/black"
         android:text="@string/courseEraLink"
+        android:textColorLink="@color/brown"
         app:layout_constraintEnd_toStartOf="@+id/imgViewCourseEra"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewStudyfy" />
@@ -98,8 +99,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center|left"
-        android:textColorLink="@color/black"
         android:text="@string/lhealthLineLink"
+        android:textColorLink="@color/brown"
         app:layout_constraintEnd_toStartOf="@+id/imgViewHealthLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewCourseEra" />
@@ -121,8 +122,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center|left"
-        android:textColorLink="@color/black"
         android:text="@string/copyleaksLink"
+        android:textColorLink="@color/brown"
         app:layout_constraintEnd_toStartOf="@+id/imgViewCopyleaks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewHealthLine" />
@@ -144,8 +145,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center|left"
-        android:textColorLink="@color/black"
         android:text="@string/careerLink"
+        android:textColorLink="@color/brown"
         app:layout_constraintEnd_toStartOf="@+id/imgViewCareer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewCopyleaks" />
@@ -167,8 +168,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center|left"
-        android:textColorLink="@color/black"
         android:text="@string/LifeHLink"
+        android:textColorLink="@color/brown"
         app:layout_constraintEnd_toStartOf="@+id/imgViewLifeH"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewCareer" />
@@ -191,5 +192,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu"/>
+
+    <Button
+        android:id="@+id/btnBackRes"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/btnBackButton"
+        android:textSize="8sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
