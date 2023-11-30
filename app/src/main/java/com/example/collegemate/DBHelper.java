@@ -43,6 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "answer8 INTEGER, " +
             "answer9 INTEGER, " +
             "answer10 INTEGER, " +
+            "totalScore INTEGER," +
            "FOREIGN KEY(user_id) REFERENCES users(_id));";
 
 
@@ -287,7 +288,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.query(
                 "users",  // Table name
-                new String[]{"_id", "firstName", "major","image"},
+                new String[]{"_id", "firstName", "major","imagePath","description", "email"},
                 "_id=?",  // Selection criteria
                 new String[]{String.valueOf(userId)},
                 null, null, null
@@ -299,12 +300,16 @@ public class DBHelper extends SQLiteOpenHelper {
             int firstNameIndex = cursor.getColumnIndex("firstName");
             int majorIndex = cursor.getColumnIndex("major");
             int imageIndex = cursor.getColumnIndex("imagePath");
+            int descriptionIndex = cursor.getColumnIndex("description");
+            int emailIndex = cursor.getColumnIndex("email");
 
             if (idIndex != -1 && firstNameIndex != -1 && majorIndex != -1 && imageIndex != -1) {
                 user.setId(cursor.getLong(idIndex));
                 user.setFirstName(cursor.getString(firstNameIndex));
                 user.setMajor(cursor.getString(majorIndex));
                 user.setImagePath(cursor.getString(imageIndex));
+                user.setDesciption(cursor.getString(descriptionIndex));
+                user.setEmail(cursor.getString(emailIndex));
             } else {
                 Log.e("CursorError", "Column indices not found");
             }

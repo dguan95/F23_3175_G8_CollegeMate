@@ -18,6 +18,12 @@
         android:theme="@style/Theme.CollegeMate"
         tools:targetApi="31">
         <activity
+            android:name=".TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Test"
+            android:exported="false" />
+        <activity
             android:name=".HousingPayment"
             android:exported="false" />
         <activity

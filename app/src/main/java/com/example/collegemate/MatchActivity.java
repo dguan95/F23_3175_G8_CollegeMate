@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,9 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
     String firstName;
     String major;
     String description;
+    String email;
+    String imagePath;
+
     long test;
 
     long userId;
@@ -107,13 +111,14 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
                 firstName = user.getFirstName();
                 major = user.getMajor();
                 description = user.getDesciption();
+                email = user.getEmail();
                 Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
                 Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
                 Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
                 Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
                 TextViewNameMatchActivity.setText(firstName);
                 TextViewInfoMatchActivity.setText(description);
-                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore);
+                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore + "\nHit me up : " + email );
             }else if (i==2) {
                 userId=2;
                 Log.d("MatchActivity", "Retrieved userId: " + userId);
@@ -122,13 +127,14 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
                 firstName = user.getFirstName();
                 major = user.getMajor();
                 description = user.getDesciption();
+                email = user.getEmail();
                 Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
                 Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
                 Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
                 Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
                 TextViewNameMatchActivity.setText(firstName);
                 TextViewInfoMatchActivity.setText(description);
-                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore);
+                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore + "\nHit me up : " + email );
             }else if (i==3) {
                 userId=3;
                 Log.d("MatchActivity", "Retrieved userId: " + userId);
@@ -137,23 +143,46 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
                 firstName = user.getFirstName();
                 major = user.getMajor();
                 description = user.getDesciption();
+                email = user.getEmail();
                 Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
                 Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
                 Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
                 Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
                 TextViewNameMatchActivity.setText(firstName);
                 TextViewInfoMatchActivity.setText(description);
-                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore);
+                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore + "\nHit me up : " + email );
             }else if (i==4) {
                 userId=4;
-                TextViewNameMatchActivity.setText(ImageList.get(i).getImgName());
-                TextViewInfoMatchActivity.setText(ImageList.get(i).getInfo());
-                TextViewRoleMatchActivity.setText(ImageList.get(i).getMajor());
+                Log.d("MatchActivity", "Retrieved userId: " + userId);
+                User user = dbHelper.getUserById(userId);
+                int totalScore = dbHelper.getTotalScoreForUser(userId);
+                firstName = user.getFirstName();
+                major = user.getMajor();
+                description = user.getDesciption();
+                email = user.getEmail();
+                Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
+                Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
+                Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
+                Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
+                TextViewNameMatchActivity.setText(firstName);
+                TextViewInfoMatchActivity.setText(description);
+                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore + "\nHit me up : " + email );
             }else if (i==5) {
                 userId=5;
-                TextViewNameMatchActivity.setText(ImageList.get(i).getImgName());
-                TextViewInfoMatchActivity.setText(ImageList.get(i).getInfo());
-                TextViewRoleMatchActivity.setText(ImageList.get(i).getMajor());
+                Log.d("MatchActivity", "Retrieved userId: " + userId);
+                User user = dbHelper.getUserById(userId);
+                int totalScore = dbHelper.getTotalScoreForUser(userId);
+                firstName = user.getFirstName();
+                major = user.getMajor();
+                description = user.getDesciption();
+                email = user.getEmail();
+                Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
+                Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
+                Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
+                Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
+                TextViewNameMatchActivity.setText(firstName);
+                TextViewInfoMatchActivity.setText(description);
+                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore + "\nHit me up : " + email );
             }
 
         }
@@ -162,10 +191,10 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int menuItemId = item.getItemId();
-
+        long userId;
         if (menuItemId == R.id.home_page){
             Intent quizIntent = new Intent(MatchActivity.this,  MainActivity.class);
-            long userId = getIntent().getLongExtra("userId", -1);
+            userId = getIntent().getLongExtra("userId", -1);
             quizIntent.putExtra("userId", userId);
             startActivity(quizIntent);
             return true;
@@ -173,11 +202,14 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
 
             return true;
         } else if (menuItemId == R.id.search_page){
-            startActivity(new Intent(MatchActivity.this, SearchActivity.class));
+            Intent intent = new Intent(MatchActivity.this, SearchActivity.class);
+            userId = getIntent().getLongExtra("userId", -1);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
             return true;
         } else if (menuItemId == R.id.profile_page){
             Intent intent = new Intent(MatchActivity.this, ProfilePage.class);
-            long userId = getIntent().getLongExtra("userId", -1);
+            userId = getIntent().getLongExtra("userId", -1);
             intent.putExtra("userId", userId);
             startActivity(intent);
             return true;
