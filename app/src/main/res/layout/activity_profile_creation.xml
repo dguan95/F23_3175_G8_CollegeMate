@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECECEC"
     android:contentDescription="@string/btnText"
     tools:context=".ProfileCreationActivity">
 
@@ -67,9 +66,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:backgroundTint="#FFFFFF"
+        app:backgroundTint="@null"
         android:text="@string/txtBtnCreate"
         android:textColor="#000000"
+
+        android:background="@drawable/custom_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -130,10 +131,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        app:backgroundTint="@color/yellow"
         android:contentDescription="@string/btnText"
         app:layout_constraintBottom_toBottomOf="@+id/imgViewProfilIcon"
         app:layout_constraintEnd_toEndOf="@+id/imgViewProfilIcon"
-        app:srcCompat="@drawable/baseline_photo_camera_24" />
+        app:srcCompat="@drawable/photo_camera" />
 
     <EditText
         android:id="@+id/editTxtUserDescription"
