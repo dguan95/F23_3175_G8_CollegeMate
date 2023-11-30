@@ -44,7 +44,6 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
 
         RecyclerView recyclerViewFloorPlans = findViewById(R.id.recyclerViewFloorPlans);
         btnBack = findViewById(R.id.btnBack);
-        btnBack.setBackgroundColor(Color.BLACK);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

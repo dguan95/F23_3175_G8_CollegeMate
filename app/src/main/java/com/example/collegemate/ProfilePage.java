@@ -102,6 +102,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
                 String year = bundle.getString("YEAR");
                 String userDesc = bundle.getString("DESCRIPTION");
                 String imagePath = bundle.getString("IMAGE");
+               // Log.d("IMAGE", imagePath);
                 if(imagePath!=null)
                 {
                     URI = Uri.parse(imagePath);
@@ -152,6 +153,7 @@ public class ProfilePage extends AppCompatActivity implements BottomNavigationVi
 
                         if(user.getImagePath()!=null)
                         {
+                            Log.d("IMAGE PATH", user.getImagePath());
                             URI = Uri.parse(user.getImagePath());
 
 

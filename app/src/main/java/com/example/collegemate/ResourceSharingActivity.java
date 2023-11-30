@@ -48,7 +48,7 @@ public class ResourceSharingActivity extends AppCompatActivity implements Bottom
         studyfyLink.setMovementMethod(LinkMovementMethod.getInstance());
 
         Button btnBack = findViewById(R.id.btnBackRes);
-        btnBack.setBackgroundColor(Color.BLACK);
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -23,7 +23,6 @@ public class HousingTipsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_housing_tips);
 
         btnBack = findViewById(R.id.btnBack2);
-        btnBack.setBackgroundColor(Color.BLACK);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -14,6 +14,7 @@
         android:layout_marginTop="18dp"
         android:text="@string/txtViewHousingTips"
         android:textSize="34sp"
+        android:textColor="@color/brown"
         app:layout_constraintStart_toEndOf="@+id/btnBack2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +26,9 @@
         android:layout_marginTop="12dp"
         android:text="@string/btnBackButton"
         android:textSize="8sp"
-        app:layout_constraintEnd_toStartOf="@+id/txtViewFindAccommTitle"
+        app:backgroundTint="@null"
+        android:background="@drawable/custom_btn"
+        android:textColor="@color/brownRed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,6 +50,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="12dp"
+        android:textColor="@color/brown"
         android:text="@string/txtHousingTip1"
         android:textAlignment="center"
         android:textStyle="bold|italic"
@@ -61,6 +65,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="12dp"
+        android:textColor="@color/brown"
         android:text="@string/txtHousingTip1_1"
         android:textAlignment="center"
         android:textAllCaps="false"
@@ -76,6 +81,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="12dp"
+        android:textColor="@color/brown"
         android:text="@string/txtHousingTip2Title"
         android:textAlignment="center"
         android:textStyle="bold|italic"
@@ -100,6 +106,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="12dp"
+        android:textColor="@color/brown"
         android:text="@string/txtViewHousingTip2"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/imgViewHousingTip2"
@@ -125,6 +132,7 @@
         android:layout_marginEnd="12dp"
         android:text="@string/txtHousingTips3Title"
         android:textStyle="bold|italic"
+        android:textColor="@color/brown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgViewHousingTips3"
         app:layout_constraintTop_toBottomOf="@+id/imgViewHousingTip2" />
@@ -138,6 +146,7 @@
         android:layout_marginEnd="12dp"
         android:text="@string/txtHousingTip3"
         android:textAlignment="center"
+        android:textColor="@color/brown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgViewHousingTips3"
         app:layout_constraintTop_toBottomOf="@+id/txtViewHousingTips3Title" />
@@ -152,6 +161,7 @@
         android:text="@string/txtViewHousingTip4Title"
         android:textAlignment="center"
         android:textStyle="bold|italic"
+        android:textColor="@color/brown"
         app:layout_constraintEnd_toStartOf="@+id/imgViewHousingTip4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgViewHousingTips3" />
@@ -165,6 +175,7 @@
         android:layout_marginEnd="12dp"
         android:text="@string/txtHousingTip4"
         android:textAlignment="center"
+        android:textColor="@color/brown"
         app:layout_constraintEnd_toStartOf="@+id/imgViewHousingTip4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewHousingTip4Title" />

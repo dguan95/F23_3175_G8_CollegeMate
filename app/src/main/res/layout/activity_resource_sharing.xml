@@ -10,12 +10,12 @@
         android:id="@+id/txtViewUsefuWebSitesTitle"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="@string/txtUsefulWeb"
         android:textColor="@color/brown"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="34sp"
         app:layout_constraintStart_toEndOf="@+id/btnBackRes"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -200,7 +200,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/btnBackButton"
+        app:backgroundTint="@null"
+        android:background="@drawable/custom_btn"
         android:textSize="8sp"
+        android:textColor="@color/brownRed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
