@@ -99,90 +99,29 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
     public void onItemClick(int i) {
         if (i != -1) {
             SelectedInd = i;
-            if (i == 0) {
+            if(i==0){
                 TextViewNameMatchActivity.setText(ImageList.get(i).getImgName());
                 TextViewInfoMatchActivity.setText(ImageList.get(i).getInfo());
                 TextViewRoleMatchActivity.setText(ImageList.get(i).getMajor());
-            } else if (i==1) {
-                userId=1;
-                Log.d("MatchActivity", "Retrieved userId: " + userId);
-                User user = dbHelper.getUserById(userId);
-                int totalScore = dbHelper.getTotalScoreForUser(userId);
-                firstName = user.getFirstName();
-                major = user.getMajor();
-                description = user.getDesciption();
-                email = user.getEmail();
-                Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
-                Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
-                Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
-                Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
-                TextViewNameMatchActivity.setText(firstName);
-                TextViewInfoMatchActivity.setText(description);
-                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore + "\nHit me up : " + email );
-            }else if (i==2) {
-                userId=2;
-                Log.d("MatchActivity", "Retrieved userId: " + userId);
-                User user = dbHelper.getUserById(userId);
-                int totalScore = dbHelper.getTotalScoreForUser(userId);
-                firstName = user.getFirstName();
-                major = user.getMajor();
-                description = user.getDesciption();
-                email = user.getEmail();
-                Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
-                Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
-                Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
-                Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
-                TextViewNameMatchActivity.setText(firstName);
-                TextViewInfoMatchActivity.setText(description);
-                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore + "\nHit me up : " + email );
-            }else if (i==3) {
-                userId=3;
-                Log.d("MatchActivity", "Retrieved userId: " + userId);
-                User user = dbHelper.getUserById(userId);
-                int totalScore = dbHelper.getTotalScoreForUser(userId);
-                firstName = user.getFirstName();
-                major = user.getMajor();
-                description = user.getDesciption();
-                email = user.getEmail();
-                Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
-                Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
-                Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
-                Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
-                TextViewNameMatchActivity.setText(firstName);
-                TextViewInfoMatchActivity.setText(description);
-                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore + "\nHit me up : " + email );
-            }else if (i==4) {
-                userId=4;
-                Log.d("MatchActivity", "Retrieved userId: " + userId);
-                User user = dbHelper.getUserById(userId);
-                int totalScore = dbHelper.getTotalScoreForUser(userId);
-                firstName = user.getFirstName();
-                major = user.getMajor();
-                description = user.getDesciption();
-                email = user.getEmail();
-                Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
-                Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
-                Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
-                Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
-                TextViewNameMatchActivity.setText(firstName);
-                TextViewInfoMatchActivity.setText(description);
-                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore + "\nHit me up : " + email );
-            }else if (i==5) {
-                userId=5;
-                Log.d("MatchActivity", "Retrieved userId: " + userId);
-                User user = dbHelper.getUserById(userId);
-                int totalScore = dbHelper.getTotalScoreForUser(userId);
-                firstName = user.getFirstName();
-                major = user.getMajor();
-                description = user.getDesciption();
-                email = user.getEmail();
-                Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
-                Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
-                Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
-                Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
-                TextViewNameMatchActivity.setText(firstName);
-                TextViewInfoMatchActivity.setText(description);
-                TextViewRoleMatchActivity.setText(major + " - Points: " +totalScore + "\nHit me up : " + email );
+            }
+            for(int j=1;j<ImageList.size();j++){
+                if(SelectedInd!=0) {
+                    userId = SelectedInd;
+                    Log.d("MatchActivity", "Retrieved userId: " + userId);
+                    User user = dbHelper.getUserById(userId);
+                    int totalScore = dbHelper.getTotalScoreForUser(userId);
+                    firstName = user.getFirstName();
+                    major = user.getMajor();
+                    description = user.getDesciption();
+                    email = user.getEmail();
+                    Log.d("MatcheActivity", "Retrieved username: " + user.getFirstName());
+                    Log.d("MatcheActivity", "Retrieved usermajor: " + user.getMajor());
+                    Log.d("MatcheActivity", "Retrieved userDescription: " + user.getDesciption());
+                    Log.d("MatchActivity", "Retrieved TotalScore: " + totalScore);
+                    TextViewNameMatchActivity.setText(firstName);
+                    TextViewInfoMatchActivity.setText(description);
+                    TextViewRoleMatchActivity.setText(major + " - Points: " + totalScore + "\nHit me up : " + email);
+                }
             }
 
         }
