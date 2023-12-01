@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -33,7 +35,8 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
     Button btnReserveRoom;
     TextView txtViewSelectedFloorPlan;
     Button btnProceedToPayment;
-
+    Bundle bundleRoomDetail;
+    Intent selectionPrice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,10 +64,10 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
 
         btnProceedToPayment = findViewById(R.id.btnProceedToPayment);
 
+
         if(SelIndex != -1){
             imgViewFloorPlan.setImageResource(FloorPlanList.get(SelIndex).getFloorPlanPic());
             txtViewSelectionDetail.setText(FloorPlanList.get(SelIndex).getFloorPlanDetails());
-            //floorPlanPrice = FloorPlanList.get(SelIndex).getFloorPlanPrice();
         } else {
             imgViewFloorPlan.setImageResource(0);
         }
@@ -90,7 +93,17 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
         btnProceedToPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FindAccommodationActivity.this, PaymentDetailsActivity.class));
+                int selIndex = floorPlanAdapter.getSelectedInd();
+                if(selIndex != -1) {
+                    bundleRoomDetail = new Bundle();
+                    bundleRoomDetail.putInt("ROOMPRICE", FloorPlanList.get(selIndex).getFloorPlanPrice());
+                    selectionPrice = new Intent(FindAccommodationActivity.this, PaymentDetailsActivity.class);
+                    selectionPrice.putExtras(bundleRoomDetail);
+                    startActivity(selectionPrice);
+                    startActivity(new Intent(FindAccommodationActivity.this, PaymentDetailsActivity.class));
+                } else {
+                    Toast.makeText(FindAccommodationActivity.this, "Select a floor plan and reserve", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

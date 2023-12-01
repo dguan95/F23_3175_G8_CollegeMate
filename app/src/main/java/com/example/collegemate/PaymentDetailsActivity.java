@@ -13,12 +13,15 @@ import android.widget.Toast;
 
 import com.braintreepayments.cardform.view.CardForm;
 
+import java.text.DecimalFormat;
+
 public class PaymentDetailsActivity extends AppCompatActivity {
 
     CardForm cardForm;
     Button btnPayment;
     AlertDialog.Builder alertBuilder;
     Button btnCancelPayment;
+    int roomSelectedPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public class PaymentDetailsActivity extends AppCompatActivity {
         cardForm = findViewById(R.id.cardForm);
         btnPayment = findViewById(R.id.btnProcessPayment);
         btnCancelPayment = findViewById(R.id.btnCancelPayment);
+        Bundle bundle = getIntent().getExtras();
+        roomSelectedPrice = getIntent().getExtras().getInt("ROOMPRICE", 0);
 
         cardForm.cardRequired(true);
         cardForm.expirationRequired(true);
@@ -46,7 +51,9 @@ public class PaymentDetailsActivity extends AppCompatActivity {
                 if(cardForm.isValid()) {
                     alertBuilder = new AlertDialog.Builder(PaymentDetailsActivity.this);
                     alertBuilder.setTitle("Confirm details to proceed");
-                    alertBuilder.setMessage("Card holder: " + cardForm.getCardholderName() + "\n");
+                    DecimalFormat df = new DecimalFormat("$#####.##");
+                    alertBuilder.setMessage("Card holder: " + cardForm.getCardholderName() + "\n" +
+                    "Amount: " + df.format(roomSelectedPrice) + "\n");
                     alertBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -68,5 +75,11 @@ public class PaymentDetailsActivity extends AppCompatActivity {
             }
         });
 
+        btnCancelPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 }
