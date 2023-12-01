@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         RecyclerMainAdapter myAdapter2
                 = new RecyclerMainAdapter(TextList, this);
         recyclerViewText.setAdapter(myAdapter2);
-        final int speedScroll = 1200;
+        final int speedScroll = 2000;
         final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
             int count = 0;
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
     private void AddData() {
         TextList.add(new GalleryMainActivity("Roomie Meet & Greet: Connect with potential roommates through speed networking sessions"));
-        TextList.add(new GalleryMainActivity("Campus Chill Night: Join us for a laid-back evening of games, snacks, and mingling. (15 words"));
+        TextList.add(new GalleryMainActivity("Campus Chill Night: Join us for a laid-back evening of games, snacks, and mingling."));
         TextList.add(new GalleryMainActivity("House Hunting Hangout: Explore available housing options with fellow students while enjoying refreshments."));
         TextList.add(new GalleryMainActivity("Hey foodies! I'm Jackson, explore cooking sessions with potential roommates! Share recipes and bond over delicious meals"));
         TextList.add(new GalleryMainActivity("Study Pod Mixer: Find study buddies and create study groups for upcoming exams in a relaxed setting"));
