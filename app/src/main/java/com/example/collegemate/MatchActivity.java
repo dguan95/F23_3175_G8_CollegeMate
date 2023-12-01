@@ -123,14 +123,9 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
     public void onItemClick(int i) {
         if (i != -1) {
             SelectedInd = i;
-            if(i==0){
-                TextViewNameMatchActivity.setText("Juliana");
-                TextViewInfoMatchActivity.setText("Hi Guys I'm Juli, hope all is well, I want to know more people and make a lot of friends");
-                TextViewRoleMatchActivity.setText("Mobile Developtment - Points: 15 \nHit me up: juli@douglas.com");
-            }
-            for(int j=1;j<ImageList.size();j++){
-                if(SelectedInd!=0) {
-                    userId = SelectedInd;
+            for(int j=0;j<ImageList.size();j++){
+
+                    userId = SelectedInd +1;
                     Log.d("MatchActivity", "Retrieved userId: " + userId);
                     User user = dbHelper.getUserById(userId);
                     int totalScore = dbHelper.getTotalScoreForUser(userId);
@@ -145,7 +140,7 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
                     TextViewNameMatchActivity.setText(firstName);
                     TextViewInfoMatchActivity.setText(description);
                     TextViewRoleMatchActivity.setText(major + " - Points: " + totalScore + "\nHit me up : " + email);
-                }
+
             }
 
         }
