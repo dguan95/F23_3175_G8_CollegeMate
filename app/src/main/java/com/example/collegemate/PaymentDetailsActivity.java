@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 import android.text.InputType;
@@ -52,13 +53,16 @@ public class PaymentDetailsActivity extends AppCompatActivity {
                     alertBuilder = new AlertDialog.Builder(PaymentDetailsActivity.this);
                     alertBuilder.setTitle("Confirm details to proceed");
                     DecimalFormat df = new DecimalFormat("$#####.##");
-                    alertBuilder.setMessage("Card holder: " + cardForm.getCardholderName() + "\n" +
-                    "Amount: " + df.format(roomSelectedPrice) + "\n");
+                    alertBuilder.setMessage("Card number: " + cardForm.getCardNumber() + "\n" +
+                            "Postal Code: " + cardForm.getPostalCode() + "\n" +
+                            "Transaction detail: room reservation\n" +
+                            "Amount due: " + df.format(roomSelectedPrice) + "\n");
                     alertBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
                             Toast.makeText(PaymentDetailsActivity.this, "Transaction Successful", Toast.LENGTH_SHORT).show();
+                            onBackPressed();
                         }
                     });
                     alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
