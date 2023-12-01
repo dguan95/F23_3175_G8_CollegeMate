@@ -93,5 +93,8 @@
     <string name="txtHousingTips2">Housing Tips</string>
     <string name="btnBackButton"> Back </string>
     <string name="txtFloorPlanInd">FloorPlanInd</string>
+    <string name="txtCardPaymentDetails">Credit Card Payment Details</string>
+    <string name="txtBtnProcessPayment">Process Payment</string>
+    <string name="txtBtnCancelPayment">Cancel</string>
 
 </resources>

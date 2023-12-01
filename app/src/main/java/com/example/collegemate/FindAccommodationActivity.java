@@ -32,6 +32,7 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
     TextView txtViewSelectionDetail;
     Button btnReserveRoom;
     TextView txtViewSelectedFloorPlan;
+    Button btnProceedToPayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,8 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
         btnReserveRoom = findViewById(R.id.btnReserveOrBookToView);
         txtViewSelectedFloorPlan = findViewById(R.id.txtViewSelectedFloorPlan);
 
+        btnProceedToPayment = findViewById(R.id.btnProceedToPayment);
+
         if(SelIndex != -1){
             imgViewFloorPlan.setImageResource(FloorPlanList.get(SelIndex).getFloorPlanPic());
             txtViewSelectionDetail.setText(FloorPlanList.get(SelIndex).getFloorPlanDetails());
@@ -66,7 +69,6 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
             imgViewFloorPlan.setImageResource(0);
         }
 
-        //FloorPlansRecyclerViewAdapter floorPlanAdapter = new FloorPlansRecyclerViewAdapter(FloorPlanList);
         FloorPlansRecyclerViewAdapter floorPlanAdapter = new FloorPlansRecyclerViewAdapter(FloorPlanList, this);
 
         GridLayoutManager gridManager = new GridLayoutManager(this,3);
@@ -85,6 +87,12 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
             }
         });
 
+        btnProceedToPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FindAccommodationActivity.this, PaymentDetailsActivity.class));
+            }
+        });
 
     }
 
