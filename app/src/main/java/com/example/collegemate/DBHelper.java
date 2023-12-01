@@ -349,6 +349,17 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return totalScore;
     }
+    public int getUserCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM users", null);
+        int count = 0;
+        if (cursor != null) {
+            cursor.moveToFirst();
+            count = cursor.getInt(0);
+            cursor.close();
+        }
+        return count;
+    }
 
 }
 

@@ -1,6 +1,11 @@
 package com.example.collegemate;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +17,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
+import java.io.File;
 import java.util.List;
 
 public class RecyclerViewMatchAdapter
@@ -57,18 +65,28 @@ public class RecyclerViewMatchAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
+        GalleryImageMatchActivity currentImage = AdapterImages.get(position);
 
-        holder.imgViewItem
-                .setImageResource(AdapterImages.get(position).getImgPic());
-        holder.txtViewItem.setText(AdapterImages.get(position).getImgName());
+        // Load image from the path
+        String imagePath = currentImage.getImgPath();
+        Log.d("RecyclerActivity", "Position: " + position + ", Retrieved ImagePath: " + imagePath);
+
+        if (imagePath != null && !imagePath.isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(Uri.parse(imagePath))
+                    .into(holder.imgViewItem);
+        } else {
+            holder.imgViewItem.setImageResource(R.drawable.user4);
+        }
+
+        holder.txtViewItem.setText(currentImage.getImgName());
         holder.itemView.setBackgroundColor(Color.parseColor("#1C1B1A"));
+
         if (position == SelectedInd){
             holder.itemView.setBackgroundColor(Color.parseColor("#303234"));
         } else {
-            holder.itemView.setBackgroundColor(
-                    Color.parseColor("#1C1B1A"));
+            holder.itemView.setBackgroundColor(Color.parseColor("#1C1B1A"));
         }
-
     }
 
     @Override

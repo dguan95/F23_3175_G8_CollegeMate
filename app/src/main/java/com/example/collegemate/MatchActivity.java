@@ -6,9 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,9 +22,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,19 +88,35 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
 
         RecyclerViewMatchAdapter myAdapter
                 = new RecyclerViewMatchAdapter(ImageList, this);
-        //GridLayoutManager gm= new GridLayoutManager(this,3);
         recyclerViewImages.setAdapter(myAdapter);
         recyclerViewImages.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
     private void AddData() {
-        ImageList.add(new GalleryImageMatchActivity("Hey there! I'm Juliet, an avid nature lover and wildlife photographer. My lens captures the raw beauty of our planet, aiming to inspire others to cherish and protect our environment. Join me in this visual journey for a greener, more sustainable world!", "Juliet" , R.drawable.user1, "BUSINESS LAW - Points: 14"));
-        ImageList.add(new GalleryImageMatchActivity("Namaste! I'm Sophia, a yoga devotee passionate about mindfulness and well-being. Through yoga and meditation, I guide seekers toward inner peace and balance. Join me on the mat for a journey of self-discovery and tranquility", "Sophia", R.drawable.user7, major));
-        ImageList.add(new GalleryImageMatchActivity("Hey folks, I'm Noah, a tech enthusiast and coding wizard. With lines of code, I weave solutions that tackle real-world problems. Exploring how technology shapes our lives, I'm on a mission to create apps that bring positive change to our communities", "Noah", R.drawable.user3, major));
-        ImageList.add(new GalleryImageMatchActivity("Hey foodies! I'm Jackson, a culinary maestro fascinated by flavors. In my kitchen laboratory, I concoct dishes that merge diverse tastes and cultures.", "Jackson", R.drawable.user4, major));
-        ImageList.add(new GalleryImageMatchActivity("Greetings, fellow history buffs! I'm Oliver, a passionate historian and storyteller. Delving into ancient civilizations", "Oliver", R.drawable.user6, major));
-        ImageList.add(new GalleryImageMatchActivity("Hola! I'm Amelia, a fashion entrepreneur with a green heart. I'm on a mission to revolutionize fashion by blending style with sustainability.", "Amelia", R.drawable.user2, major));
 
+        int userCount = dbHelper.getUserCount();
+        for (int userId = 1; userId <= userCount; userId++) {
+            User user = dbHelper.getUserById(userId);
+            if (user != null) {
+                int totalScore = dbHelper.getTotalScoreForUser(userId);
+                String firstName = user.getFirstName();
+                String major = user.getMajor();
+                String description = user.getDesciption();
+                String email = user.getEmail();
+                String imagePath = user.getImagePath();
+                Log.d("MatchActivity", "Retrieved ImagePath: " + imagePath);
+
+                Drawable userImage = loadImageFromPath(imagePath);
+
+                ImageList.add(new GalleryImageMatchActivity(
+                        description,
+                        firstName,
+                        userImage,
+                        imagePath,
+                        major + " - Points: " + totalScore + "\nHit me up : " + email
+                ));
+            }
+        }
     }
 
     @Override
@@ -100,9 +124,9 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
         if (i != -1) {
             SelectedInd = i;
             if(i==0){
-                TextViewNameMatchActivity.setText(ImageList.get(i).getImgName());
-                TextViewInfoMatchActivity.setText(ImageList.get(i).getInfo());
-                TextViewRoleMatchActivity.setText(ImageList.get(i).getMajor());
+                TextViewNameMatchActivity.setText("Juliana");
+                TextViewInfoMatchActivity.setText("Hi Guys I'm Juli, hope all is well, I want to know more people and make a lot of friends");
+                TextViewRoleMatchActivity.setText("Mobile Developtment - Points: 15 \nHit me up: juli@douglas.com");
             }
             for(int j=1;j<ImageList.size();j++){
                 if(SelectedInd!=0) {
@@ -159,5 +183,27 @@ public class MatchActivity extends AppCompatActivity implements RecyclerViewMatc
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
+    }
+
+
+    private Drawable loadImageFromPath(String imagePath) {
+        Drawable drawable;
+        try {
+            ContentResolver resolver = getContentResolver();
+            InputStream inputStream = resolver.openInputStream(Uri.parse(imagePath));
+            Log.d("MatchActivity", "Retrieved inputstream: " + inputStream);
+
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            Log.d("MatchActivity", "Retrieved bitmap: " + bitmap);
+            drawable = new BitmapDrawable(getResources(), bitmap);
+
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            drawable = getResources().getDrawable(R.drawable.user7);
+        }
+        return drawable;
     }
 }

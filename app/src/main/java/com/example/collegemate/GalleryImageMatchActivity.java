@@ -1,5 +1,7 @@
 package com.example.collegemate;
 
+import android.graphics.drawable.Drawable;
+
 public class GalleryImageMatchActivity {
     private String Info;
     private String ImgName;
@@ -7,11 +9,24 @@ public class GalleryImageMatchActivity {
     private String major;
     private int ImgPic;
 
-    public GalleryImageMatchActivity(String info, String imgName, int imgPic, String major) {
+    private Drawable ImgDrawable;
+    private String ImgPath;
+
+    public GalleryImageMatchActivity(String info, String imgName, Drawable imgDrawable,String imgPath, String major) {
         Info = info;
         ImgName = imgName;
-        ImgPic = imgPic;
+        ImgDrawable = imgDrawable;
+        ImgPath=imgPath;
         this.major = major;
+
+    }
+
+    public String getImgPath() {
+        return ImgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        ImgPath = imgPath;
     }
 
     public String getMajor() {
@@ -46,4 +61,11 @@ public class GalleryImageMatchActivity {
         ImgPic = imgPic;
     }
 
+    public Drawable getImgDrawable() {
+        return ImgDrawable;
+    }
+
+    public void setImgDrawable(Drawable imgDrawable) {
+        ImgDrawable = imgDrawable;
+    }
 }
