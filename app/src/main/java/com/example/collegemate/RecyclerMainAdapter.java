@@ -1,9 +1,11 @@
 package com.example.collegemate;
 
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,80 +15,72 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class RecyclerMainAdapter extends RecyclerView.Adapter<RecyclerMainAdapter.ImageViewHolder>{
-    List<GalleryMainActivity> AdapterImages2;
+    List<GalleryMainActivity> AdapterText;
+    int SelectedInd2;
 
-    int SelectedInd;
-    RecyclerMainAdapter.OnItemClickListener onItemClickListener;
+    OnItemClickListener onItemClickListener;
 
-    public RecyclerMainAdapter(List<GalleryMainActivity> adapterImages2,
-                                    RecyclerMainAdapter.OnItemClickListener onItemClickListener) {
-        AdapterImages2 = adapterImages2;
-        SelectedInd = -1;
-        this.onItemClickListener = (OnItemClickListener) onItemClickListener;
+    public RecyclerMainAdapter(List<GalleryMainActivity> adapterText, OnItemClickListener onItemClickListener) {
+        AdapterText = adapterText;
+        SelectedInd2 = -1;
+        this.onItemClickListener = onItemClickListener;
     }
 
-    public RecyclerMainAdapter(View itemView) {
-
+    public List<GalleryMainActivity> getAdapterText() {
+        return AdapterText;
     }
 
-
-    public List<GalleryMainActivity> getAdapterImages() {
-        return AdapterImages2;
+    public void setAdapterText(List<GalleryMainActivity> adapterText) {
+        AdapterText = adapterText;
+        SelectedInd2 = -1;
     }
 
-    public void setAdapterImages(List<GalleryMainActivity> adapterImages) {
-        AdapterImages2 = adapterImages;
-        SelectedInd = -1;
-    }
-    public int getSelectedInd() {
-        return SelectedInd;
+    public int getSelectedInd2() {
+        return SelectedInd2;
     }
 
-    public void setSelectedInd(int selectedInd) {
-        SelectedInd = selectedInd;
+    public void setSelectedInd2(int selectedInd2) {
+        SelectedInd2 = selectedInd2;
     }
 
     @NonNull
     @Override
-    public RecyclerMainAdapter.ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
+    public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView2 = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_item_main, parent, false);
-        RecyclerMainAdapter.ImageViewHolder holder = new ImageViewHolder(itemView);
-        return holder;
+        ImageViewHolder holder2 = new ImageViewHolder(itemView2);
+        return holder2;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerMainAdapter.ImageViewHolder holder, int position) {
-             holder.txtViewItem.setText(AdapterImages2.get(position).getInfo2());
-        holder.itemView.setBackgroundColor(Color.parseColor("#1C1B1A"));
-        if (position == SelectedInd){
-            holder.itemView.setBackgroundColor(Color.parseColor("#303234"));
-        } else {
-            holder.itemView.setBackgroundColor(
-                    Color.parseColor("#1C1B1A"));
-        }
-
-    }
+        holder.txtViewItemMainNew.setText(AdapterText.get(position).getInfo2());
+      }
 
     @Override
     public int getItemCount() {
-        return AdapterImages2.size();
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(int i);
+        return AdapterText.size();
     }
 
     public class ImageViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgViewItem;
-        TextView txtViewItem;
-
+        TextView txtViewItemMainNew;
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtViewItem = itemView.findViewById(R.id.textViewMatch);
-
+            txtViewItemMainNew = itemView.findViewById(R.id.textViewItemMain);
+            txtViewItemMainNew.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onItemClick(getAdapterPosition());
+                    SelectedInd2 = getAdapterPosition();
+                    notifyDataSetChanged();
+                }
+            });
         }
     }
+
+    public interface OnItemClickListener {
+        public void onItemClick(int i);}
+
 }
 
 

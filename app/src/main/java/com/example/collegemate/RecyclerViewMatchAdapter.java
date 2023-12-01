@@ -27,24 +27,24 @@ public class RecyclerViewMatchAdapter
         AdapterImages = adapterImages;
         SelectedInd = -1;
         this.onItemClickListener = onItemClickListener;
-    }
+    } //
 
     public List<GalleryImageMatchActivity> getAdapterImages() {
         return AdapterImages;
-    }
+    } //
 
     public void setAdapterImages(List<GalleryImageMatchActivity> adapterImages) {
         AdapterImages = adapterImages;
         SelectedInd = -1;
-    }
+    } //
 
     public int getSelectedInd() {
         return SelectedInd;
-    }
+    } //
 
     public void setSelectedInd(int selectedInd) {
         SelectedInd = selectedInd;
-    }
+    } //
 
     @NonNull
     @Override
@@ -53,7 +53,7 @@ public class RecyclerViewMatchAdapter
                 .inflate(R.layout.activity_item_match, parent, false);
         ImageViewHolder holder = new ImageViewHolder(itemView);
         return holder;
-    }
+    } //
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
@@ -75,7 +75,7 @@ public class RecyclerViewMatchAdapter
     public int getItemCount() {
         return AdapterImages.size();
 
-    }
+    } //
     public class ImageViewHolder extends RecyclerView.ViewHolder{
         ImageView imgViewItem;
         TextView txtViewItem;
@@ -93,10 +93,10 @@ public class RecyclerViewMatchAdapter
                 }
             });
         }
-    }
+    } //
 
     public interface OnItemClickListener {
         public void onItemClick(int i);
-    }
+    } //
 }
 
