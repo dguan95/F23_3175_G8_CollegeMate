@@ -36,6 +36,14 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
         SearchAdapter2 searchAdap = new SearchAdapter2(SearchList);
         listViewSearch.setAdapter(searchAdap);
 
+
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("userId")) {
+            long userId = intent.getLongExtra("userId", -1);
+            Log.d("SearchActivity", "Retrieved userId: " + userId);
+        }
+
+
         listViewSearch.setOnItemClickListener((AdapterView<?> adapterView, View view, int i, long l)->{
 
             if(i == 0){
@@ -43,7 +51,12 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
             } else if(i == 1){
                 startActivity(new Intent(SearchActivity.this, HousingTipsActivity.class));
             } else if(i == 2){
-                startActivity(new Intent(SearchActivity.this, FindAccommodationActivity.class));
+                Intent findRoomIntent = new Intent(SearchActivity.this, FindAccommodationActivity.class);
+                long userId = getIntent().getLongExtra("userId", -1);
+                findRoomIntent.putExtra("userId", userId);
+                startActivity(findRoomIntent);
+
+                //startActivity(new Intent(SearchActivity.this, FindAccommodationActivity.class));
             } else {
                 startActivity(new Intent(SearchActivity.this, ResourceSharingActivity.class));
             }
@@ -54,11 +67,11 @@ public class SearchActivity extends AppCompatActivity implements BottomNavigatio
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.search_page);
 
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         if (intent != null && intent.hasExtra("userId")) {
             long userId = intent.getLongExtra("userId", -1);
             Log.d("SearchActivity", "Retrieved userId: " + userId);
-        }
+        }*/
 
 
     }

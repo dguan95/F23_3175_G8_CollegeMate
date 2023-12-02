@@ -1,17 +1,20 @@
 package com.example.collegemate;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +40,8 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
     Button btnProceedToPayment;
     Bundle bundleRoomDetail;
     Intent selectionPrice;
+    AlertDialog.Builder alertBuilder;
+    AlertDialog.Builder alertBuilder2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +57,11 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                long userid = getIntent().getExtras().getLong("userId", -1);
+                Intent backToSearchIntent = new Intent(FindAccommodationActivity.this, SearchActivity.class);
+                backToSearchIntent.putExtra("userId", userid);
+                startActivity(backToSearchIntent);
+                //onBackPressed();
             }
         });
 
@@ -79,33 +88,80 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
         recyclerViewFloorPlans.setAdapter(floorPlanAdapter);
         recyclerViewFloorPlans.setLayoutManager(gridManager);
 
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("userId")) {
+            long userId = intent.getLongExtra("userId", -1);
+            Log.d("FindAccommodationActivity", "Retrieved userId: " + userId);
+        }
+
         btnReserveRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //for testing purpose
+                //long userid = getIntent().getLongExtra("userId", -1);
                 int selectedIndex = floorPlanAdapter.getSelectedInd();
-                int roomPrice = FloorPlanList.get(selectedIndex).getFloorPlanPrice();
-                String roomSelected = FloorPlanList.get(selectedIndex).getFloorPlanName();
-                DecimalFormat df = new DecimalFormat("$#####.##");
-                txtViewSelectedFloorPlan.setText("Room type selected: " + roomSelected + "\nPrice: " + df.format(roomPrice));
+                if(selectedIndex == -1){
+
+                    alertBuilder = new AlertDialog.Builder(FindAccommodationActivity.this);
+                    alertBuilder.setMessage("Please select room type");
+                    alertBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                    AlertDialog alertDialog = alertBuilder.create();
+                    alertDialog.show();
+                    //Toast.makeText(FindAccommodationActivity.this, "Please select room type", Toast.LENGTH_SHORT).show();;
+                } else {
+                    int roomPrice = FloorPlanList.get(selectedIndex).getFloorPlanPrice();
+                    String roomSelected = FloorPlanList.get(selectedIndex).getFloorPlanName();
+                    DecimalFormat df = new DecimalFormat("$#####.##");
+                    txtViewSelectedFloorPlan.setText("Room type selected: " + roomSelected + "\nPrice: " + df.format(roomPrice));
+                }
+
             }
         });
+
+        Bundle paymentBundle = getIntent().getExtras();
+        //long userid = paymentBundle.getLong("userId", -1);
+        int amountPaid = paymentBundle.getInt("AmountPaid", 0);
+        if(amountPaid != 0){
+            txtViewSelectedFloorPlan.setText("Recent amount paid: " + amountPaid);
+            btnProceedToPayment.setEnabled(false);
+        }
 
         btnProceedToPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int selIndex = floorPlanAdapter.getSelectedInd();
                 if(selIndex != -1) {
+
+                    long userId = getIntent().getLongExtra("userId", -1);
+                    Log.d("FindAccommodation", "Retrieved : " + userId);
                     bundleRoomDetail = new Bundle();
                     bundleRoomDetail.putInt("ROOMPRICE", FloorPlanList.get(selIndex).getFloorPlanPrice());
+                    bundleRoomDetail.putLong("userId", userId);
                     selectionPrice = new Intent(FindAccommodationActivity.this, PaymentDetailsActivity.class);
                     selectionPrice.putExtras(bundleRoomDetail);
                     startActivity(selectionPrice);
                     startActivity(new Intent(FindAccommodationActivity.this, PaymentDetailsActivity.class));
                 } else {
-                    Toast.makeText(FindAccommodationActivity.this, "Select a floor plan and reserve", Toast.LENGTH_SHORT).show();
+                    alertBuilder2 = new AlertDialog.Builder(FindAccommodationActivity.this);
+                    alertBuilder2.setMessage("Please select room to reserve");
+                    alertBuilder2.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog alertDialog = alertBuilder.create();
+                    alertDialog.show();
+                    //Toast.makeText(FindAccommodationActivity.this, "Select a floor plan and reserve", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
 
     }
 
