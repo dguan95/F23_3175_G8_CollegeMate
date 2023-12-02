@@ -136,7 +136,9 @@ public class FindAccommodationActivity extends AppCompatActivity implements Floo
             public void onClick(View view) {
                 int selIndex = floorPlanAdapter.getSelectedInd();
                 if(selIndex != -1) {
+
                     long userId = getIntent().getLongExtra("userId", -1);
+                    Log.d("FindAccommodation", "Retrieved : " + userId);
                     bundleRoomDetail = new Bundle();
                     bundleRoomDetail.putInt("ROOMPRICE", FloorPlanList.get(selIndex).getFloorPlanPrice());
                     bundleRoomDetail.putLong("userId", userId);

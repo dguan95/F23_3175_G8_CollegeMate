@@ -33,8 +33,8 @@ public class PaymentDetailsActivity extends AppCompatActivity {
         cardForm = findViewById(R.id.cardForm);
         btnPayment = findViewById(R.id.btnProcessPayment);
         btnCancelPayment = findViewById(R.id.btnCancelPayment);
-        Bundle bundle = getIntent().getExtras();
-        roomSelectedPrice = getIntent().getExtras().getInt("ROOMPRICE", 0);
+        /*Bundle bundle = getIntent().getExtras();
+        roomSelectedPrice = bundle.getInt("ROOMPRICE", 0);*/
 
         cardForm.cardRequired(true);
         cardForm.expirationRequired(true);
@@ -52,6 +52,8 @@ public class PaymentDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(cardForm.isValid()) {
+                    Bundle bundle = getIntent().getExtras();
+                    roomSelectedPrice = bundle.getInt("ROOMPRICE", 0);
                     long userid = bundle.getLong("userId", -1);
                     alertBuilder = new AlertDialog.Builder(PaymentDetailsActivity.this);
                     alertBuilder.setTitle("Confirm details to proceed");
