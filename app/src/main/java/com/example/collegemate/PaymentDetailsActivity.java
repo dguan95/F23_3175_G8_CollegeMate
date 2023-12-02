@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -46,10 +47,12 @@ public class PaymentDetailsActivity extends AppCompatActivity {
         cardForm.setup(PaymentDetailsActivity.this);
         cardForm.getCvvEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
 
+
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(cardForm.isValid()) {
+                    long userid = bundle.getLong("userId", -1);
                     alertBuilder = new AlertDialog.Builder(PaymentDetailsActivity.this);
                     alertBuilder.setTitle("Confirm details to proceed");
                     DecimalFormat df = new DecimalFormat("$#####.##");
@@ -62,7 +65,17 @@ public class PaymentDetailsActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
                             Toast.makeText(PaymentDetailsActivity.this, "Transaction Successful", Toast.LENGTH_SHORT).show();
-                            onBackPressed();
+
+                            Bundle paymentSuccessBundle = new Bundle();
+                            int payAmount = roomSelectedPrice;
+                            paymentSuccessBundle.putInt("AmountPaid",payAmount);
+                            paymentSuccessBundle.putLong("userId", userid);
+                            Intent backToSearchIntent = new Intent(PaymentDetailsActivity.this, FindAccommodationActivity.class);
+                            backToSearchIntent.putExtras(paymentSuccessBundle);
+                            //backToSearchIntent.putExtra("userId", userid);
+                            startActivity(backToSearchIntent);
+                            //onBackPressed();
+
                         }
                     });
                     alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -82,7 +95,14 @@ public class PaymentDetailsActivity extends AppCompatActivity {
         btnCancelPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+
+                Bundle cancelPayment = new Bundle();
+                long userId = getIntent().getLongExtra("userId", -1);
+                cancelPayment.putLong("userId", userId);
+                Intent backToSearchIntent2 = new Intent(PaymentDetailsActivity.this, FindAccommodationActivity.class);
+                backToSearchIntent2.putExtras(cancelPayment);
+                startActivity(backToSearchIntent2);
+                //onBackPressed();
             }
         });
     }
